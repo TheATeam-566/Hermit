@@ -1,0 +1,19 @@
+{
+  "name": "hermitapp",
+  "version": "1.0.0",
+  "description": "Order your favourite items from The Cheesecake Factory online through Hermit!",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "A-Team",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
