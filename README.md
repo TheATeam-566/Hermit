@@ -13,23 +13,23 @@ In order to add code to the `dev` version of Hermit, follow the steps below acco
 1) Create your own Fork from THEATEAM-566/Hermit 
 2) Clone your forked project onto your local machine
 3) Open your project with VSCODE (or your IDE of choice)
-4) `cd src/frontend` and run `npm i`
-5) `cd src/backend` and run `npm i`
+4) `cd Hermit` and run `npm i`
+5) `cd src/frontend` and run `npm i`
 
 To run **BOTH** the backend & the frontend:
-1) `cd src/backend` and run `npm run dev`
+1) `cd Hermit` and run `npm run dev`
 
 To run **ONLY** the dev backend:
-1) `cd src/backend` and run `npm run server`
+1) `cd Hermit` and run `npm run express`
     1) Navigate to `localhost:5000` to access the backend
 
 To run **ONLY** the dev frontend, in a new terminal:
-1) `cd src/frontend` and run `npm start`
+1) `cd src/frontend` and run `npm run frontend`
     1) Navigate to `localhost:3000` to access the frontend
 
 To run the production version of Hermit:
-1) `cd src/backend` and run `npm run build`
-2) After `build` finishes, run `npm run prod`. This will launch both the backend and the frontend for us.
+1) `cd Hermit` and run `npm run build`
+2) After `build` finishes, run `npm run prod`. This will launch both the backend and the frontend.
 
 ## Contributing
 #### In order to contribute to Hermit please carefully read and follow the instructions below:
