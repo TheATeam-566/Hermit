@@ -39,3 +39,7 @@ To run the production version of Hermit:
 
 #### Notes
 * Prettier should already be set up suchthat all our code should look the same. It should prompt you to install Prettier when you open your fork in VSCode
+* Ports:
+  * Port 3000 is used by the frontend in `dev` mode (see above.)
+  * Port 5000 is used by the frontend in `prod` mode (see above.)
+  * Port 8000 is used by the backend (express) in both `dev` and `prod`.
