@@ -10,9 +10,6 @@
     "build": "npm run build --prefix src/frontend",
     "prod": "concurrently \"node src/backend/server.js\" \"serve -s src/frontend/build\""
   },
-  "engines": {
-    "node": "12.12.0"
-  },
   "author": "A-Team",
   "license": "MIT",
   "dependencies": {
