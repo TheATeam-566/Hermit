@@ -5,15 +5,18 @@ class Menuitems extends Component {
     super();
     this.state = {
       menuitems: [],
+      drinkitems: [],
     };
   }
 
   componentDidMount() {
-    fetch('/api/menuitems')
+    fetch('http://localhost:8000/drinkitems')
       .then((res) => res.json())
-      .then((menuitems) =>
-        this.setState({ menuitems }, () => console.log('Menuitems fetched...', menuitems))
-      );
+      .then((drinkitems) => this.setState({ drinkitems }));
+
+    fetch('http://localhost:8000/menuitems')
+      .then((res) => res.json())
+      .then((menuitems) => this.setState({ menuitems }));
   }
 
   render() {
@@ -23,6 +26,11 @@ class Menuitems extends Component {
         <ul>
           {this.state.menuitems.map((menuitem) => (
             <li key={menuitem.id}>{menuitem.description}</li>
+          ))}
+        </ul>
+        <ul>
+          {this.state.drinkitems.map((drinkitem) => (
+            <li key={drinkitem.id}>{drinkitem.description}</li>
           ))}
         </ul>
       </div>
