@@ -14,10 +14,10 @@
   "license": "MIT",
   "dependencies": {
     "concurrently": "^5.3.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "serve": "^11.3.2"
   },
-  "proxy": "localhost:8000/",
   "devDependencies": {
     "eslint": "^7.15.0",
     "eslint-config-airbnb": "^18.2.1",
