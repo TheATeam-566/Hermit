@@ -10,11 +10,11 @@ class Menuitems extends Component {
   }
 
   componentDidMount() {
-    fetch('/drinkitems')
+    fetch('http://localhost:8000/drinkitems')
       .then((res) => res.json())
       .then((drinkitems) => this.setState({ drinkitems }));
 
-    fetch('/menuitems')
+    fetch('http://localhost:8000/menuitems')
       .then((res) => res.json())
       .then((menuitems) => this.setState({ menuitems }));
   }
