@@ -1,6 +1,8 @@
 # Hermit
 Hermit is a Food Delivery App exclusively for use by The Cheesecake Factory. This project serves as The A Team's culminating capstone project, representing our time here at Seneca College.
 
+Comprised of work between January and April 2021.
+
 ## Running Hermit
 Hermit has two versions: `production` and `development`, aka `prod` and `dev` accordingly.
 
