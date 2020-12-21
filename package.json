@@ -8,7 +8,8 @@
     "frontend": "npm start --prefix src/frontend",
     "dev": "concurrently \"npm run express\" \"npm run frontend\"",
     "build": "npm run build --prefix src/frontend",
-    "prod": "concurrently \"node src/backend/server.js\" \"serve -s src/frontend/build\""
+    "serve": "concurrently \"node src/backend/server.js\" \"serve -s src/frontend/build\"",
+    "prod": "npm run build & npm run prod"
   },
   "author": "A-Team",
   "license": "MIT",
