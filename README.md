@@ -29,9 +29,10 @@ To run **ONLY** the dev frontend, in a new terminal:
 1) `cd src/frontend` and run `npm run frontend`
     1) Navigate to `localhost:3000` to access the frontend
 
-To run the production version of Hermit:
-1) `cd Hermit` and run `npm run build`
-2) After `build` finishes, run `npm run prod`. This will launch both the backend and the frontend.
+To run **ONLY** the production version of Hermit (for testing purposes):
+1) `cd Hermit` and run `npm run prod`.
+
+Feel free to take a look at various other commands in `package.json` but the above commands should be all you need.
 
 ## Contributing
 #### In order to contribute to Hermit please carefully read and follow the instructions below:
