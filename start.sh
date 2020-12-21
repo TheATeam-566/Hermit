@@ -1,5 +1,4 @@
 #!/bin/bash
 
-cd ~/Hermit/src/backend
-npm run build
+cd ~/Hermit
 npm run prod
