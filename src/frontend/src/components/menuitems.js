@@ -10,13 +10,17 @@ class Menuitems extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8000/drinkitems')
-      .then((res) => res.json())
-      .then((drinkitems) => this.setState({ drinkitems }));
+    fetch('/drinkitems')
+      //.then((res) => res.json())
+      .then((res) => res.text())
+      .then((res) => console.log(res));
+    //.then((drinkitems) => this.setState({ drinkitems }));
 
-    fetch('http://localhost:8000/menuitems')
-      .then((res) => res.json())
-      .then((menuitems) => this.setState({ menuitems }));
+    fetch('/menuitems')
+      //.then((res) => res.json())
+      .then((res) => res.text())
+      .then((res) => console.log(res));
+    //.then((menuitems) => this.setState({ menuitems }));
   }
 
   render() {
