@@ -1,22 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Menuitems extends Component {
-  constructor() {
-    super();
-    this.state = {
-      menuitems: [],
-      drinkitems: [],
-    };
-  }
+class Menuitems extends React.Component {
+  state = { menuitems: [], drinkitems: [] };
+
+  // Used for demo purposes
+  fetchMenuItems = async () => {
+    const response = await fetch('/api/menuitems');
+    const items = await response.json();
+    this.setState({ menuitems: items });
+  };
+
+  // Used for demo purposes
+  fetchDrinkItems = async () => {
+    const response = await fetch('/api/drinkitems');
+    const items = await response.json();
+    this.setState({ drinkitems: items });
+  };
 
   componentDidMount() {
-    fetch('/api/drinkitems')
-      .then((res) => res.json())
-      .then((drinkitems) => this.setState({ drinkitems }));
-
-    fetch('/api/menuitems')
-      .then((res) => res.json())
-      .then((menuitems) => this.setState({ menuitems }));
+    this.fetchMenuItems();
+    this.fetchDrinkItems();
   }
 
   render() {
