@@ -9,6 +9,7 @@ const port = 8000;
 // app.use('/api/menuitems', menuRouter);
 app.use('/api/drinkitems', drinkRouter);
 app.use('/api/menu', menuRouter);
+// app.use('/api/menu/categories', menuRouter);
 app.listen(port, () => console.log(`Express server started on port ${port}`));
 
 module.exports = app;
