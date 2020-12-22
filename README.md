@@ -1,3 +1,5 @@
+![](https://i.imgur.com/jtbzN1D.jpg)
+
 # Hermit
 Hermit is a Food Delivery App exclusively for use by The Cheesecake Factory. This project serves as The A Team's culminating capstone project, representing our time here at Seneca College.
 
