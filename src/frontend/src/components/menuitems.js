@@ -14,7 +14,7 @@ class Menuitems extends Component {
       .then((res) => res.json())
       .then((drinkitems) => this.setState({ drinkitems }));
 
-    fetch('/api/menuitems')
+    fetch('/api/menu')
       .then((res) => res.json())
       .then((menuitems) => this.setState({ menuitems }));
   }
