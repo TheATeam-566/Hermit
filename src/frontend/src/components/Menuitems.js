@@ -1,7 +1,7 @@
 import React from 'react';
 
 class Menuitems extends React.Component {
-  state = { menuitems: [], drinkitems: [] };
+  state = { menuitems: [], drinkitems: [], categories: [] };
 
   // Used for demo purposes
   fetchMenuItems = async () => {
@@ -17,9 +17,16 @@ class Menuitems extends React.Component {
     this.setState({ drinkitems: items });
   };
 
+  fetchMenuCategories = async () => {
+    const response = await fetch('api/menu/categories');
+    const categories = await response.json();
+    this.setState({ categories: categories });
+  };
+
   componentDidMount() {
     this.fetchMenuItems();
     this.fetchDrinkItems();
+    this.fetchMenuCategories();
   }
 
   render() {
@@ -34,6 +41,11 @@ class Menuitems extends React.Component {
         <ul>
           {this.state.drinkitems.map((drinkitem) => (
             <li key={drinkitem.id}>{drinkitem.description}</li>
+          ))}
+        </ul>
+        <ul>
+          {this.state.categories.map((category) => (
+            <li key={category.title}>{category}</li>
           ))}
         </ul>
       </div>
