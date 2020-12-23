@@ -22,19 +22,15 @@ passport.use(
 );
 
 router.get(
-  '/auth/google',
+  '/',
   passport.authenticate('google', {
     scope: ['profile', 'email'],
   })
 );
-router.get(
-  'http://localhost:8000/auth/google/callback',
-  passport.authenticate('google'),
-  (req, res) => {
-    res.redirect('http://hermitapp.me');
-    res.send('you reached the redirect URI');
-  }
-);
+router.get('/callback', passport.authenticate('google'), (req, res) => {
+  res.redirect('http://hermitapp.me');
+  res.send('you reached the redirect URI');
+});
 
 /*
 app.get(
