@@ -2,6 +2,7 @@
 
 # keys
 serviceAccountKey.json
+oauthKey.js
 
 # dependencies
 node_modules/
