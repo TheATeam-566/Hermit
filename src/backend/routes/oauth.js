@@ -11,12 +11,13 @@ passport.use(
     {
       clientID: oauthKeys.googleclientID,
       clientSecret: oauthKeys.googleclientSecret,
-      callbackURL: '/auth/google/callback',
+      callbackURL: 'http://localhost:8000/auth/google/callback',
     },
-    (accessToken, refreshToken, profile) => {
+    (accessToken, refreshToken, profile, done) => {
       console.log('access token: ', accessToken);
       console.log('refresh token: ', refreshToken);
       console.log('profile: ', profile);
+      done('error', profile);
     }
   )
 );
@@ -27,10 +28,14 @@ router.get(
     scope: ['profile', 'email'],
   })
 );
-router.get('/callback', passport.authenticate('google'), (req, res) => {
-  res.redirect('http://hermitapp.me');
-  res.send('you reached the redirect URI');
-});
+router.get(
+  '/callback',
+  passport.authenticate('google', { failureRedirect: 'http://google.ca' }),
+  (req, res) => {
+    res.redirect('/');
+    res.send('you reached the redirect URI');
+  }
+);
 
 /*
 app.get(
