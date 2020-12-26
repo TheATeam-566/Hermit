@@ -6,14 +6,17 @@ const router = express.Router();
 router.get(
   '/',
   passport.authenticate('google', {
-    scope: ['profile', 'email'],
+    scope: ['https://www.googleapis.com/auth/plus.login'],
   })
 );
 router.get(
   '/callback',
-  passport.authenticate('google', { failureRedirect: 'http://google.ca' }),
+  passport.authenticate('google', {
+    successRedirect: 'http://localhost:3000',
+    failureRedirect: 'http://google.ca',
+  }),
   (req, res) => {
-    res.redirect('/');
+    res.redirect('http://localhost:8000/auth/google/callback');
     res.send('you reached the redirect URI');
   }
 );

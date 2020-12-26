@@ -1,9 +1,13 @@
-const db = require('../services/firestore');
+class User {
+  constructor(data) {
+    this.id = data.id ? data.id : 0;
+    this.fName = data.fName ? data.fName : null;
+    this.lName = data.lName ? data.lName : null;
+    this.email = data.email ? data.email : null;
+    this.address = data.address ? data.address : null;
+    this.image = data.image ? data.image : null;
+    this.auth = data.auth ? data.auth : null;
+  }
+}
 
-const getUser = async () => {
-  const dbRef = db.collection('users').doc('test');
-  const user = await dbRef.get();
-  return user;
-  // console.log(user);
-};
-getUser();
+module.exports = User;

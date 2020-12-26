@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('../config/serviceAccountKey');
+const serviceAccount = require('../config/serviceAccountKey.json');
 
 // initialize an instance of firestore with admin priviledges
 admin.initializeApp({
