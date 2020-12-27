@@ -1,14 +1,7 @@
 import React from 'react';
 
 class Menuitems extends React.Component {
-  state = { menuitems: [], drinkitems: [], categories: [] };
-
-  // Used for demo purposes
-  fetchMenuItems = async () => {
-    const response = await fetch('/api/menuitems');
-    const items = await response.json();
-    this.setState({ menuitems: items });
-  };
+  state = { drinkitems: [], categories: [] };
 
   // Used for demo purposes
   fetchDrinkItems = async () => {
@@ -24,7 +17,6 @@ class Menuitems extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchMenuItems();
     this.fetchDrinkItems();
     this.fetchMenuCategories();
   }
@@ -33,11 +25,6 @@ class Menuitems extends React.Component {
     return (
       <div>
         <h2>Menu Items</h2>
-        <ul>
-          {this.state.menuitems.map((menuitem) => (
-            <li key={menuitem.id}>{menuitem.description}</li>
-          ))}
-        </ul>
         <ul>
           {this.state.drinkitems.map((drinkitem) => (
             <li key={drinkitem.id}>{drinkitem.description}</li>
