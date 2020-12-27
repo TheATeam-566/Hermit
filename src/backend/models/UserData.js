@@ -1,22 +1,37 @@
 const db = require('../services/firestore');
 
-const getUser = async () => {
-  const dbRef = db.collection('users').doc('test');
-  const user = await dbRef.get();
-  // console.log(user);
-  return user;
+module.exports = {
+  getOrSetUser: async (newUser) => {
+    const docRef = db.collection('users').doc(`${newUser.id}`);
+    const doc = await docRef.get();
+
+    // If user does not exist...
+    if (!doc.exists) {
+      await db
+        .collection('users')
+        .doc(`${newUser.id}`)
+        .set(JSON.parse(JSON.stringify(newUser)));
+    } else {
+      // else, the user exists.
+      // this is a placeholder comment
+      // for future revision
+    }
+  },
+
+  getUser: async (id) => {
+    const docRef = db.collection('users').doc(`${id}`);
+    const doc = await docRef.get();
+    if (!doc.exists) {
+      return false;
+    }
+    console.log('Document data:', doc.data());
+    return true;
+  },
+
+  setUser: async (newUser) => {
+    await db
+      .collection('users')
+      .doc(`${newUser.id}`)
+      .set(JSON.parse(JSON.stringify(newUser)));
+  },
 };
-
-async function writeUserData(newUser) {
-  // const dbRef = db.ref(`users/${newUser.id}`);
-  // await dbRef.set(newUser);
-  // await dbRef.set(newUser);
-  // console.log('new user');
-  await db.collection('users').doc(`${newUser.id}`).set(newUser);
-  // console.log('new user');
-  // console.log(newUser);
-  return true;
-}
-
-module.exports = writeUserData;
-module.exports = getUser;

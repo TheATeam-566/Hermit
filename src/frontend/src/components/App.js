@@ -16,7 +16,7 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <Menuitems />
+        {/* <Menuitems /> */}
       </div>
     );
   }
