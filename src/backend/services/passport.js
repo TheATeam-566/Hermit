@@ -2,10 +2,9 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User');
 const oauthKeys = require('../config/keys');
-const { getUser, setUser, getOrSetUser } = require('../models/UserData');
+const { getUser, getOrSetUser } = require('../models/UserData');
 
 passport.serializeUser((user, done) => {
-  console.log('cap it');
   done(null, user.id);
 });
 
@@ -36,7 +35,6 @@ passport.use(
       // create a new user object using the data object created above
       const newUser = new User(data);
       getOrSetUser(newUser).then((user) => {
-        // console.log({ user });
         done(null, user);
       });
     }
