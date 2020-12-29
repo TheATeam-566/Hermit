@@ -16,6 +16,7 @@ module.exports = {
       // this is a placeholder comment
       // for future revision
     }
+    return newUser;
   },
 
   getUser: async (id) => {

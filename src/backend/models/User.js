@@ -7,6 +7,7 @@ class User {
     this.address = data.address ? data.address : null;
     this.image = data.image ? data.image : null;
     this.auth = data.auth ? data.auth : null;
+    this.accessToken = data.accessToken ? data.accessToken : null;
   }
 }
 
