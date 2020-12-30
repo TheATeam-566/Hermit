@@ -1,20 +1,9 @@
 const express = require('express');
 
 const router = express.Router();
-const admin = require('firebase-admin');
-
-const serviceAccount = require('../serviceAccountKey.json');
-
-// initialize an instance of firestore with admin priviledges
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
-
-// creates the db variable to be accessed
-const db = admin.firestore();
+const db = require('../services/firestore');
 
 // Routes
-
 // GET the entire menu
 router.get('/', async (req, res) => {
   const dbRef = db.collection('db').doc('menu').collection('items');
