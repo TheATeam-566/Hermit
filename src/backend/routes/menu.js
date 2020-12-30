@@ -1,11 +1,9 @@
 const express = require('express');
 
 const router = express.Router();
-
 const db = require('../services/firestore');
 
 // Routes
-
 // GET the entire menu
 router.get('/', async (req, res) => {
   const dbRef = db.collection('db').doc('menu').collection('items');

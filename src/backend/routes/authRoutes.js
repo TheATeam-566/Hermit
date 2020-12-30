@@ -12,11 +12,19 @@ const isUserAuthenticated = (req, res, next) => {
   }
 };
 
-// this route will use the method above to determine whether or not a user has been authenticated
+// This route will use the method above to determine whether or not a user has been authenticated.
+// Used for testing purposes.
 router.get('/test', isUserAuthenticated, (req, res) => {
   res.send('User is authenticated');
 });
 
+// Sends the current user who is logged in.
+// Used for testing purposes.
+router.get('/current_user', (req, res) => {
+  res.send(req.user);
+});
+
+// Used in the Google OAuth flow. Specify email and user profile to return.
 router.get(
   '/google',
   passport.authenticate('google', {
@@ -24,6 +32,7 @@ router.get(
   })
 );
 
+// Callback function when a user is properly authenticated.
 router.get(
   '/google/callback',
   passport.authenticate('google', {
@@ -36,10 +45,7 @@ router.get(
   }
 );
 
-router.get('/current_user', (req, res) => {
-  res.send(req.user);
-});
-
+// Logs the user out.
 router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('http://localhost:3000/');

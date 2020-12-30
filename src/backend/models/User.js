@@ -1,3 +1,6 @@
+// This is our User "schema" that we use when creating a new user.
+// It is persisted to firestore
+
 class User {
   constructor(data) {
     this.id = data.id ? data.id : 0;
