@@ -36,7 +36,7 @@ router.get(
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: 'http://localhost:3000',
+    successRedirect: 'http://hermitapp.me',
     failureRedirect: 'http://google.ca',
   }),
   (req, res) => {
@@ -48,7 +48,7 @@ router.get(
 // Logs the user out.
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('http://localhost:3000/');
+  res.redirect('http://hermitapp.me');
 });
 
 module.exports = router;
