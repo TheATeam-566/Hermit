@@ -27,7 +27,6 @@ module.exports = {
     if (!doc.exists) {
       return false;
     }
-    console.log('Document data:', doc.data());
     return true;
   },
 
