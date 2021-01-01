@@ -1,0 +1,18 @@
+body {
+  margin-top: 20px;
+  background: #eee;
+}
+
+.profile-header-info {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.profile-header-info h4 {
+  color: rgb(0, 0, 0);
+}
+
+.profile-header-img {
+  float: left;
+  padding-right: 5px;
+}
