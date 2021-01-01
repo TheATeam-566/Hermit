@@ -26,7 +26,8 @@ module.exports = {
     const doc = await docRef.get();
 
     if (!doc.exists) {
-      return `User is not logged in or cannot be found with a Google id of ${id}`;
+      // return `User is not logged in or cannot be found with a Google id of ${id}`;
+      return false;
     }
 
     return doc.data();

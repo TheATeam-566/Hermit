@@ -18,10 +18,14 @@ router.get('/test', isUserAuthenticated, (req, res) => {
   res.send('User is authenticated');
 });
 
-// Sends the current user who is logged in.
-// Used for testing purposes.
-router.get('/current_user', (req, res) => {
-  res.send(req.user);
+// Verifies if a user is logged in and if logged in, sends the current user who is logged in.
+// Note - JSON.parse used in this method : https://stackoverflow.com/questions/54536960/unexpected-end-of-json-input-in-react-js
+router.get('/current_user', isUserAuthenticated, (req, res) => {
+  if (!req.user) {
+    res.send(JSON.parse(req.user));
+  } else {
+    res.send(req.user);
+  }
 });
 
 // Used in the Google OAuth flow. Specify email and user profile to return.
