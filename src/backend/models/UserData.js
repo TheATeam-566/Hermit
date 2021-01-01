@@ -24,10 +24,12 @@ module.exports = {
   getUser: async (id) => {
     const docRef = db.collection('users').doc(`${id}`);
     const doc = await docRef.get();
+
     if (!doc.exists) {
-      return false;
+      return `User is not logged in or cannot be found with a Google id of ${id}`;
     }
-    return true;
+
+    return doc.data();
   },
 
   // Create a new user
