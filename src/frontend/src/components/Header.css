@@ -24,4 +24,5 @@ body {
 .header-search-form .icon {
   padding-top: 10px;
   padding-bottom: 7px;
+  float: right;
 }

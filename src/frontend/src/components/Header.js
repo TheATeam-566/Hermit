@@ -85,8 +85,9 @@ class Header extends React.Component {
   renderBasketEmoji = () => {
     return (
       <div className="icon">
+        Total:&nbsp;
         <Link to="/#">
-          <Basket size={30} /> ${this.state.total}
+          ${this.state.total} <Basket size={30} />
         </Link>
       </div>
     );
