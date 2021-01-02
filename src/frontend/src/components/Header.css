@@ -16,3 +16,12 @@ body {
   float: left;
   padding-right: 5px;
 }
+
+.header-search-form {
+  justify-content: right;
+}
+
+.header-search-form .icon {
+  padding-top: 10px;
+  padding-bottom: 7px;
+}
