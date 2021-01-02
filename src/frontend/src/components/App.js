@@ -11,7 +11,7 @@ class App extends React.Component {
       <div>
         <Header />
         {/*<Menuitems />*/}
-        <Mainpage></Mainpage>
+        <Mainpage />
         <Footer />
       </div>
     );
