@@ -42,11 +42,11 @@ router.get(
   passport.authenticate('google', {
     successRedirect: 'http://hermitapp.me',
     failureRedirect: 'http://google.ca',
-  }),
-  (req, res) => {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-  }
+  })
+  // (req, res) => {
+  // If this function gets called, authentication was successful.
+  // `req.user` contains the authenticated user.
+  // }
 );
 
 // Logs the user out.

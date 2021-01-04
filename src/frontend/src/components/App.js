@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Menuitems from './Menuitems';
 import Header from './Header';
 import Footer from './Footer';
 import Mainpage from './Mainpage';
@@ -12,7 +11,6 @@ class App extends React.Component {
       <div>
         <BrowserRouter>
           <Header />
-          {/* <Menuitems /> */}
           <Mainpage />
           <Footer />
         </BrowserRouter>
