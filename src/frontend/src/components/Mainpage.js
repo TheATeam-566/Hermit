@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
+import { Container, Col, Row } from 'react-bootstrap';
 import Categories from './Categories';
 import Items from './Items';
-import { Container, Col, Row } from 'react-bootstrap';
 
 class Mainpage extends Component {
   state = { category: '' };
 
   onCategoryClick = (category) => {
     this.setState({ category: category });
-  };
-
-  componentDidMount = () => {
-    console.log(this.state.category);
   };
 
   render() {
