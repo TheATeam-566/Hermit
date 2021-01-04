@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Menuitems from './Menuitems';
 import Header from './Header';
 import Footer from './Footer';
@@ -9,10 +10,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header />
-        {/*<Menuitems />*/}
-        <Mainpage />
-        <Footer />
+        <BrowserRouter>
+          <Header />
+          {/* <Menuitems /> */}
+          <Mainpage />
+          <Footer />
+        </BrowserRouter>
       </div>
     );
   }
