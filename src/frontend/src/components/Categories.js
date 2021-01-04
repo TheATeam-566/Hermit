@@ -38,6 +38,7 @@ class Categories extends Component {
 
   componentDidMount() {
     this.fetchMenuCategories();
+    console.log(this.state.clickedCategory);
   }
 
   render() {

@@ -1,5 +1,4 @@
 import React from 'react';
-import Menuitems from './Menuitems';
 import Header from './Header';
 import Footer from './Footer';
 import Mainpage from './Mainpage';
@@ -10,7 +9,6 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        {/*<Menuitems />*/}
         <Mainpage />
         <Footer />
       </div>

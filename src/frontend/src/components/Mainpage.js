@@ -7,7 +7,10 @@ class Mainpage extends Component {
 
   onCategoryClick = (category) => {
     this.setState({ category: category });
-    //console.log(this.state.category);
+  };
+
+  componentDidMount = () => {
+    console.log(this.state.category);
   };
 
   render() {
