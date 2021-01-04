@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Container, Col, Row, Image, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Basket, Wallet2 } from 'react-bootstrap-icons';
+import { Basket } from 'react-bootstrap-icons';
 import './Header.css';
 
 class Header extends React.Component {
