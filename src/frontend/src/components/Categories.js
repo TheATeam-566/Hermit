@@ -46,8 +46,6 @@ class Categories extends Component {
       <div>
         {this.renderCategories()}
 
-        <hr />
-
         <br />
       </div>
     );
