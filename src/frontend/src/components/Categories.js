@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { ListGroup } from 'react-bootstrap';
 
 class Categories extends Component {
   state = { categories: [], clickedCategory: '' };
@@ -7,7 +7,7 @@ class Categories extends Component {
   fetchMenuCategories = async () => {
     const response = await fetch('api/menu/categories');
     const categories = await response.json();
-    this.setState({ categories: categories, clickedCategory: '' });
+    this.setState({ categories: categories });
   };
 
   handleClick = async (e, category) => {
@@ -38,14 +38,12 @@ class Categories extends Component {
 
   componentDidMount() {
     this.fetchMenuCategories();
-    console.log(this.state.clickedCategory);
   }
 
   render() {
     return (
       <div>
         {this.renderCategories()}
-
         <br />
       </div>
     );

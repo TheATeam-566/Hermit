@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import { Button, Card } from 'react-bootstrap';
 
 class Items extends Component {
-  state = {
-    items: [],
-    category: this.props.category,
-  };
+  state = { items: [], category: '' };
 
-  componentWillReceiveProps = (nextProps) => {
-    this.setState({ category: nextProps.category });
-    this.setState({ items: [] });
-    this.fetchMenuItems();
+  componentWillReceiveProps = async (nextProps) => {
+    await this.setState({ category: nextProps.category });
+    await this.fetchMenuItems();
   };
 
   fetchMenuItems = async (props) => {
@@ -18,6 +14,8 @@ class Items extends Component {
     const items = await response.json();
     this.setState({ items: items });
   };
+
+  componentDidMount() {}
 
   renderCategories = () => {
     return (
