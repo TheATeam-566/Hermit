@@ -4,6 +4,8 @@
 serviceAccountKey.json
 oauthKey.js
 keys.js
+cert.pem
+key.pem
 
 # dependencies
 node_modules/
