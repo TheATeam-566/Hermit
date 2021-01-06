@@ -15,8 +15,6 @@ class Items extends Component {
     this.setState({ items: items });
   };
 
-  componentDidMount() {}
-
   renderCategories = () => {
     return (
       <div>
@@ -27,7 +25,15 @@ class Items extends Component {
               <Card.Body>
                 <Card.Title>{item.caption}</Card.Title>
                 <Card.Text>A delicious item 🦆</Card.Text>
-                <Button variant="primary">Add to Cart</Button>
+                {/* Logic to render price a button if we have no price */}
+                {item.price && <Card.Text>${item.price}</Card.Text>}
+                {!item.price && <Card.Text>No Price</Card.Text>}
+                {item.price && <Button variant="primary">Add to Cart</Button>}
+                {!item.price && (
+                  <Button variant="secondary" disabled>
+                    Add to Cart
+                  </Button>
+                )}
               </Card.Body>
             </Card>
           </div>

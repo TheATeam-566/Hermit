@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
-import Categories from './Categories';
-import Items from './Items';
+import Categories from '../Categories/Categories';
+import Items from '../Items/Items';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 class Mainpage extends Component {
   state = { category: '' };
@@ -13,6 +15,7 @@ class Mainpage extends Component {
   render() {
     return (
       <div className="mainpage">
+        <Header />
         <Container fluid>
           <Row>
             <Col xs={3}>
@@ -23,6 +26,7 @@ class Mainpage extends Component {
             </Col>
           </Row>
         </Container>
+        <Footer />
       </div>
     );
   }
