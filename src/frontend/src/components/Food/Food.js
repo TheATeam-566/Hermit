@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
-import Categories from '../Categories/Categories';
-import Items from '../Items/Items';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import FoodCategories from './FoodCategories';
+import FoodCard from './FoodCard';
 
-class Mainpage extends Component {
+class Food extends Component {
   state = { category: '' };
 
   onCategoryClick = (category) => {
@@ -14,22 +12,20 @@ class Mainpage extends Component {
 
   render() {
     return (
-      <div className="mainpage">
-        <Header />
+      <div>
         <Container fluid>
           <Row>
             <Col xs={3}>
-              <Categories onCategoryClick={this.onCategoryClick} />
+              <FoodCategories onCategoryClick={this.onCategoryClick} />
             </Col>
             <Col xs={9}>
-              <Items category={this.state.category} />
+              <FoodCard category={this.state.category} />
             </Col>
           </Row>
         </Container>
-        <Footer />
       </div>
     );
   }
 }
 
-export default Mainpage;
+export default Food;

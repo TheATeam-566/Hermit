@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-class Categories extends Component {
+class FoodCategories extends Component {
   state = { categories: [], clickedCategory: '' };
 
   fetchMenuCategories = async () => {
@@ -50,4 +50,4 @@ class Categories extends Component {
   }
 }
 
-export default Categories;
+export default FoodCategories;

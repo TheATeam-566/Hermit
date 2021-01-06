@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import MainPage from './MainPage/MainPage';
+import Main from './Main/Main';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
@@ -8,7 +8,7 @@ class App extends React.Component {
     return (
       <div>
         <BrowserRouter>
-          <MainPage />
+          <Main />
         </BrowserRouter>
       </div>
     );

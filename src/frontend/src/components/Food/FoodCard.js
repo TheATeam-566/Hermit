@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Card } from 'react-bootstrap';
 
-class Items extends Component {
+class FoodCard extends Component {
   state = { items: [], category: '' };
 
   componentWillReceiveProps = async (nextProps) => {
@@ -47,4 +47,4 @@ class Items extends Component {
   }
 }
 
-export default Items;
+export default FoodCard;
