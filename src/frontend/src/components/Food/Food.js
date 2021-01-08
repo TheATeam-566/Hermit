@@ -4,10 +4,15 @@ import FoodCategories from './FoodCategories';
 import FoodCard from './FoodCard';
 
 class Food extends Component {
-  state = { category: '' };
+  state = { category: '', total: 0.0 };
 
   onCategoryClick = (category) => {
     this.setState({ category: category });
+  };
+
+  onAddToCart = async (total) => {
+    this.setState({ total: total });
+    await this.props.receiveTotal(this.state.total);
   };
 
   render() {
@@ -19,7 +24,7 @@ class Food extends Component {
               <FoodCategories onCategoryClick={this.onCategoryClick} />
             </Col>
             <Col xs={9}>
-              <FoodCard category={this.state.category} />
+              <FoodCard category={this.state.category} onAddToCart={this.onAddToCart} />
             </Col>
           </Row>
         </Container>

@@ -9,7 +9,12 @@ class Header extends React.Component {
 
   async componentDidMount() {
     await this.fetchUser();
+    await console.log(typeof this.state.total);
   }
+
+  componentWillReceiveProps = async (nextProps) => {
+    await this.setState({ total: nextProps.total });
+  };
 
   fetchUser = async () => {
     const response = await fetch('auth/current_user');
