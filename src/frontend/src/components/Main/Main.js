@@ -4,17 +4,29 @@ import Food from '../Food/Food';
 import Footer from '../Footer/Footer';
 
 class MainPage extends Component {
-  state = { total: 0.0 }; // For use in FoodCard.js to calculate the total and send to Header.
+  // Receiving items added to cart, calculating total,
+  // and sending total & cart to header for modal use.
+  state = { total: 0.0, cart: [] };
 
-  receiveTotal = (total) => {
-    this.setState({ total: total });
+  receiveCart = (cart) => {
+    this.setState({ cart: cart });
+
+    let priceToAdd = this.state.total;
+
+    // Calculating the total of all the items within the cart.
+    this.state.cart.map((item) => {
+      priceToAdd = this.state.total + item.price;
+      return (priceToAdd = Number(priceToAdd.toFixed(2))); // Rounding the total to nearest cent
+    });
+
+    this.setState({ total: priceToAdd });
   };
 
   render() {
     return (
       <div className="mainpage">
-        <Header total={this.state.total} />
-        <Food receiveTotal={this.receiveTotal} />
+        <Header total={this.state.total} cart={this.state.cart} />
+        <Food receiveCart={this.receiveCart} />
         <Footer />
       </div>
     );

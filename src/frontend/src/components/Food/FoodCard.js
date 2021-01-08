@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Card } from 'react-bootstrap';
 
 class FoodCard extends Component {
-  state = { items: [], category: '', total: 0.0, selectedItems: [] };
+  state = { items: [], category: '', cart: [] };
 
   componentWillReceiveProps = async (nextProps) => {
     await this.setState({ category: nextProps.category });
@@ -15,12 +15,13 @@ class FoodCard extends Component {
     this.setState({ items: items });
   };
 
-  clickHandler = async (e, price) => {
+  clickHandler = async (e, item) => {
     e.preventDefault();
-    let priceToAdd = await (this.state.total + price);
-    priceToAdd = await Number(priceToAdd.toFixed(2)); // Rounding the total to nearest cent
-    this.setState({ total: priceToAdd });
-    await this.props.onAddToCart(this.state.total);
+    const tempCart = await this.state.cart;
+    await tempCart.push(item);
+
+    await this.setState({ cart: tempCart });
+    await this.props.onAddToCart(this.state.cart);
   };
 
   // Logic to render price a button if we have no price
@@ -29,7 +30,7 @@ class FoodCard extends Component {
       return (
         <div>
           <Card.Text>${item.price}</Card.Text>
-          <Button variant="primary" onClick={(e) => this.clickHandler(e, item.price)}>
+          <Button variant="primary" onClick={(e) => this.clickHandler(e, item)}>
             Add to Cart
           </Button>
         </div>

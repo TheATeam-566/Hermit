@@ -5,15 +5,14 @@ import { Basket } from 'react-bootstrap-icons';
 import './Header.css';
 
 class Header extends React.Component {
-  state = { avatarURL: '', name: '', address: '', isLoggedIn: false, total: '0.00' };
+  state = { avatarURL: '', name: '', address: '', isLoggedIn: false, total: '0.00', cart: [] };
 
-  async componentDidMount() {
+  componentDidMount = async () => {
     await this.fetchUser();
-    await console.log(typeof this.state.total);
-  }
+  };
 
-  componentWillReceiveProps = async (nextProps) => {
-    await this.setState({ total: nextProps.total });
+  componentWillReceiveProps = (nextProps) => {
+    this.setState({ total: nextProps.total, cart: nextProps.cart });
   };
 
   fetchUser = async () => {
@@ -87,17 +86,6 @@ class Header extends React.Component {
     }
   };
 
-  renderBasketEmoji = () => {
-    return (
-      <div className="icon">
-        Total:&nbsp;
-        <Link to="/#">
-          ${this.state.total} <Basket size={30} />
-        </Link>
-      </div>
-    );
-  };
-
   renderSearchForm = () => {
     return (
       <div>
@@ -125,6 +113,17 @@ class Header extends React.Component {
           </Row>
         </Container>
         <hr />
+      </div>
+    );
+  };
+
+  renderBasketEmoji = () => {
+    return (
+      <div className="icon">
+        Total:&nbsp;
+        <div>
+          ${this.state.total} <Basket size={30} />
+        </div>
       </div>
     );
   };

@@ -21,11 +21,7 @@ class FoodCategories extends Component {
       <div className="category-mainpage-info">
         <ListGroup as="ul">
           {this.state.categories.map((category) => (
-            <ListGroup.Item
-              as="li"
-              key={category.title}
-              onClick={(e) => this.handleClick(e, category)}
-            >
+            <ListGroup.Item as="li" key={category} onClick={(e) => this.handleClick(e, category)}>
               {category}
             </ListGroup.Item>
           ))}
