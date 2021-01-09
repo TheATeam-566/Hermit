@@ -2,10 +2,11 @@ import React from 'react';
 import { Button, Container, Col, Row, Image, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Basket } from 'react-bootstrap-icons';
+import CartModal from './CartModal';
 import './Header.css';
 
 class Header extends React.Component {
-  state = { avatarURL: '', name: '', address: '', isLoggedIn: false, total: '0.00', cart: [] };
+  state = { avatarURL: '', name: '', address: '', isLoggedIn: true, total: '0.00', cart: [] };
 
   componentDidMount = async () => {
     await this.fetchUser();
@@ -117,19 +118,36 @@ class Header extends React.Component {
     );
   };
 
+  showModal = (e) => {
+    this.setState({
+      show: !this.state.show,
+    });
+  };
+
   renderBasketEmoji = () => {
     return (
       <div className="icon">
-        Total:&nbsp;
-        <div>
-          ${this.state.total} <Basket size={30} />
+        <div
+          onClick={(e) => {
+            this.showModal(e);
+          }}
+        >
+          Total:{' '}
+          <Link to="#">
+            ${this.state.total} <Basket size={30} />
+          </Link>
         </div>
       </div>
     );
   };
 
   render() {
-    return <div>{this.renderCurrentUser()}</div>;
+    return (
+      <div>
+        {this.renderCurrentUser()}
+        <CartModal onClose={this.showModal} show={this.state.show} children={this.state.cart} />
+      </div>
+    );
   }
 }
 
