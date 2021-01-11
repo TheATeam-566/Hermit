@@ -7,14 +7,13 @@ class CartModal extends React.Component {
     this.props.onClose && this.props.onClose(e);
   };
 
-  showModal = (e) => {
+  showModal = () => {
     this.setState({
       show: !this.state.show,
     });
   };
 
   renderModalBody = () => {
-    console.log(this.props.children);
     if (this.props.children.length === 0) {
       return (
         <Modal.Body>
@@ -40,6 +39,7 @@ class CartModal extends React.Component {
                     </Col>
                     <Col xs={6}>
                       <br />
+                      <br />
                       {String(food.caption)}
                       <br />
                       {'A delicious item 🦆'}
@@ -47,12 +47,16 @@ class CartModal extends React.Component {
                       <br />
                     </Col>
                     <Col>
+                      <br />
+                      <br />
                       <Button variant="danger">
                         <DashCircleFill />
                       </Button>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <Button variant="success">
                         <PlusCircleFill />
                       </Button>
+                      <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{food.quantity}</h2>
                     </Col>
                   </Row>
                 </Container>
@@ -64,7 +68,6 @@ class CartModal extends React.Component {
       );
     }
   };
-  //};
 
   render() {
     if (!this.props.show) {

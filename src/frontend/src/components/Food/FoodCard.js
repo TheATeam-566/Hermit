@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Card } from 'react-bootstrap';
+import _ from 'lodash';
 
 class FoodCard extends Component {
   state = { items: [], category: '', cart: [] };
@@ -17,10 +18,27 @@ class FoodCard extends Component {
 
   clickHandler = async (e, item) => {
     e.preventDefault();
-    const tempCart = await this.state.cart;
-    await tempCart.push(item);
 
-    await this.setState({ cart: tempCart });
+    const objectToPush = {
+      caption: item.caption,
+      image: item.image,
+      price: item.price,
+      quantity: 0, // This has to stay at 0 due to post increment below
+    };
+
+    // Pushing the item the user is adding to cart array
+    await this.state.cart.push(objectToPush);
+
+    // Setting the state of cart to ONLY unique items
+    await this.setState({ cart: _.uniqBy(this.state.cart, 'caption') });
+
+    // Incrementing the quantity in the cart when a duplicated item is added to cart
+    await this.state.cart.forEach((food) => {
+      if (food.caption === objectToPush.caption) {
+        food.quantity++;
+      }
+    });
+
     await this.props.onAddToCart(this.state.cart);
   };
 

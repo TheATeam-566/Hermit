@@ -12,8 +12,8 @@ class Header extends React.Component {
     await this.fetchUser();
   };
 
-  componentWillReceiveProps = (nextProps) => {
-    this.setState({ total: nextProps.total, cart: nextProps.cart });
+  componentWillReceiveProps = async (nextProps) => {
+    await this.setState({ total: nextProps.total, cart: nextProps.cart });
   };
 
   fetchUser = async () => {
@@ -80,7 +80,7 @@ class Header extends React.Component {
       return (
         <div>
           <h6>
-            <Link to="/#">No address.</Link>
+            <Link to="#">No address.</Link>
           </h6>
         </div>
       );
@@ -118,7 +118,7 @@ class Header extends React.Component {
     );
   };
 
-  showModal = (e) => {
+  showModal = () => {
     this.setState({
       show: !this.state.show,
     });
