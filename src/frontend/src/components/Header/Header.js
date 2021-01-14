@@ -6,7 +6,7 @@ import CartModal from './CartModal';
 import './Header.css';
 
 class Header extends React.Component {
-  state = { avatarURL: '', name: '', address: '', isLoggedIn: true, total: '0.00', cart: [] };
+  state = { avatarURL: '', name: '', address: '', isLoggedIn: false, total: '0.00', cart: [] };
 
   componentDidMount = async () => {
     await this.fetchUser();
