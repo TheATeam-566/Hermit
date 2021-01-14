@@ -22,11 +22,20 @@ class MainPage extends Component {
     this.setState({ total: priceToAdd });
   };
 
+  // This method receives the updated total and cart from Header.js and then sets the state for Main.js
+  receiveCartFromModal = async (updatedCart, updatedTotal) => {
+    await this.setState({ cart: updatedCart, total: updatedTotal });
+  };
+
   render() {
     return (
       <div className="mainpage">
-        <Header total={this.state.total} cart={this.state.cart} />
-        <Food receiveCart={this.receiveCart} />
+        <Header
+          total={this.state.total}
+          cart={this.state.cart}
+          receiveCartFromModal={this.receiveCartFromModal}
+        />
+        <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
         <Footer />
       </div>
     );

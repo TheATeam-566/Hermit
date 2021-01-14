@@ -6,11 +6,12 @@ class FoodCard extends Component {
   state = { items: [], category: '', cart: [] };
 
   componentWillReceiveProps = async (nextProps) => {
+    await this.setState({ cart: nextProps.updatedCart });
     await this.setState({ category: nextProps.category });
     await this.fetchMenuItems();
   };
 
-  fetchMenuItems = async (props) => {
+  fetchMenuItems = async () => {
     const response = await fetch(`api/menu/${this.state.category}/items`);
     const items = await response.json();
     this.setState({ items: items });
@@ -28,7 +29,6 @@ class FoodCard extends Component {
 
     // Pushing the item the user is adding to cart array
     await this.state.cart.push(objectToPush);
-
     // Setting the state of cart to ONLY unique items
     await this.setState({ cart: _.uniqBy(this.state.cart, 'caption') });
 

@@ -16,6 +16,24 @@ class Header extends React.Component {
     await this.setState({ total: nextProps.total, cart: nextProps.cart });
   };
 
+  // This method is called by CartModal.js whenever quantity is updated within the Modal.
+  // The purpose of this method is to pass back the updated cart array from CartModal.js to Header.js.
+  updateCartQuantities = async (updatedCart) => {
+    this.setState({ cart: updatedCart });
+    // Calculating the total of all the items within the updated cart.
+    let newTotal = 0;
+    this.state.cart.forEach((item) => {
+      newTotal += item.price * item.quantity;
+      return (newTotal = Number(newTotal.toFixed(2))); // Rounding the total to nearest cent
+    });
+
+    await this.setState({ total: newTotal });
+
+    // This method is sent as a prop to this component (Header.js) by Main.js.
+    // The purpose of this method is to pass back the updated cart array back to Main.js
+    await this.props.receiveCartFromModal(this.state.cart, this.state.total);
+  };
+
   fetchUser = async () => {
     const response = await fetch('auth/current_user');
     const userInfo = await response.json();
@@ -119,9 +137,7 @@ class Header extends React.Component {
   };
 
   showModal = () => {
-    this.setState({
-      show: !this.state.show,
-    });
+    this.setState({ show: !this.state.show });
   };
 
   renderBasketEmoji = () => {
@@ -145,7 +161,12 @@ class Header extends React.Component {
     return (
       <div>
         {this.renderCurrentUser()}
-        <CartModal onClose={this.showModal} show={this.state.show} children={this.state.cart} />
+        <CartModal
+          onClose={this.showModal}
+          show={this.state.show}
+          children={this.state.cart}
+          updateCartQuantities={this.updateCartQuantities}
+        />
       </div>
     );
   }

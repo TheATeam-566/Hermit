@@ -24,7 +24,11 @@ class Food extends Component {
               <FoodCategories onCategoryClick={this.onCategoryClick} />
             </Col>
             <Col xs={9}>
-              <FoodCard category={this.state.category} onAddToCart={this.onAddToCart} />
+              <FoodCard
+                category={this.state.category}
+                onAddToCart={this.onAddToCart}
+                updatedCart={this.props.updatedCart}
+              />
             </Col>
           </Row>
         </Container>
