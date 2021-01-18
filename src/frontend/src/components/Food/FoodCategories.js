@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-class Categories extends Component {
+class FoodCategories extends Component {
   state = { categories: [], clickedCategory: '' };
 
   fetchMenuCategories = async () => {
@@ -21,11 +21,7 @@ class Categories extends Component {
       <div className="category-mainpage-info">
         <ListGroup as="ul">
           {this.state.categories.map((category) => (
-            <ListGroup.Item
-              as="li"
-              key={category.title}
-              onClick={(e) => this.handleClick(e, category)}
-            >
+            <ListGroup.Item as="li" key={category} onClick={(e) => this.handleClick(e, category)}>
               {category}
             </ListGroup.Item>
           ))}
@@ -50,4 +46,4 @@ class Categories extends Component {
   }
 }
 
-export default Categories;
+export default FoodCategories;
