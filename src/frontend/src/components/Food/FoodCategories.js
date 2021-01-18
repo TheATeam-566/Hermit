@@ -18,7 +18,7 @@ class FoodCategories extends Component {
 
   renderCategories = () => {
     return (
-      <div className="category-mainpage-info">
+      <>
         <ListGroup as="ul">
           {this.state.categories.map((category) => (
             <ListGroup.Item as="li" key={category} onClick={(e) => this.handleClick(e, category)}>
@@ -28,7 +28,7 @@ class FoodCategories extends Component {
         </ListGroup>
         <br />
         <br />
-      </div>
+      </>
     );
   };
 
@@ -38,10 +38,10 @@ class FoodCategories extends Component {
 
   render() {
     return (
-      <div>
+      <>
         {this.renderCategories()}
         <br />
-      </div>
+      </>
     );
   }
 }
