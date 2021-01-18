@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Header from './Header';
-import Footer from './Footer';
-import Mainpage from './Mainpage';
+import Main from './Main/Main';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
@@ -10,9 +8,7 @@ class App extends React.Component {
     return (
       <div>
         <BrowserRouter>
-          <Header />
-          <Mainpage />
-          <Footer />
+          <Main />
         </BrowserRouter>
       </div>
     );
