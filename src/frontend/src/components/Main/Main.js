@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Food from '../Food/Food';
 import Footer from '../Footer/Footer';
+import OrderConfirmation from '../orderConfirmation/OrderConfirmation';
 
 class MainPage extends Component {
   // Receiving items added to cart, calculating total,
@@ -30,13 +32,24 @@ class MainPage extends Component {
   render() {
     return (
       <div className="mainpage">
-        <Header
-          total={this.state.total}
-          cart={this.state.cart}
-          receiveCartFromModal={this.receiveCartFromModal}
-        />
-        <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
-        <Footer />
+        <Route exact path="/">
+          <Header
+            total={this.state.total}
+            cart={this.state.cart}
+            receiveCartFromModal={this.receiveCartFromModal}
+          />
+          <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
+          <Footer />
+        </Route>
+
+        <Route exact path="/orderConfirmation">
+          <Header
+            total={this.state.total}
+            cart={this.state.cart}
+            receiveCartFromModal={this.receiveCartFromModal}
+          />
+          <OrderConfirmation />
+        </Route>
       </div>
     );
   }
