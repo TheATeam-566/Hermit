@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import MapContainer from '../Map/MapContainer';
-import { length, time, userAddress } from '../Map/Map';
+import DistanceMap from '../Map/DistanceMap';
 
 class OrderConfirmation extends Component {
   renderCartReview = () => {
@@ -66,10 +66,7 @@ class OrderConfirmation extends Component {
           <MapContainer />
         </Row>
         <Row>
-          <Col>{time}</Col>
-        </Row>
-        <Row>
-          <Col>You are located {length} away</Col>
+          <Col><DistanceMap /></Col>
         </Row>
       </div>
     );
