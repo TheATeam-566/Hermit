@@ -12,6 +12,7 @@ class MapDirectionsRenderer extends Component {
       address: this.props.address,
       origin: this.props.origin,
       travelMode: this.props.travelMode,
+      distance: null,
     };
   }
 
@@ -29,12 +30,18 @@ class MapDirectionsRenderer extends Component {
           this.setState({
             directions: result,
           });
+          //need this to call parent function to set distance in parent
+          this.props.getDistance(this.state.distance);
         } else {
           this.setState({ error: result });
         }
       }
     );
   }
+
+  setDistance = (newDistance) => {
+    this.props.getDistance(newDistance);
+  };
 
   render() {
     return (
@@ -44,6 +51,7 @@ class MapDirectionsRenderer extends Component {
             address={this.state.address}
             origin={this.state.origin}
             travelMode={this.state.travelMode}
+            getDistance={this.setDistance.bind(this)}
           ></DistanceMap>
           <DirectionsRenderer directions={this.state.directions} />
         </div>

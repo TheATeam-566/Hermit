@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, ListGroup, Image, Container, Col, Row } from 'react-bootstrap';
 import { PlusCircleFill, DashCircleFill } from 'react-bootstrap-icons';
 import MapContainer from '../Map/MapContainer';
-import DistanceMap from '../Map/DistanceMap';
 
 class OrderConfirmation extends Component {
   state = {
@@ -70,6 +69,14 @@ class OrderConfirmation extends Component {
     );
   };
 
+  setDistance = (newDistance) => {
+    this.setState({
+      distance: newDistance,
+    });
+    //REMOVE THIS BEFORE COMMIT
+    console.log('DISTANCE FROM OrderConfirmation: ', this.state.distance);
+  };
+
   renderPriceBreakdown = () => {
     return (
       <div>
@@ -80,7 +87,7 @@ class OrderConfirmation extends Component {
         {this.insertBreak()}
         <Row>
           <Col>Delivery Fee: </Col>
-          <Col>$4.99</Col>
+          <Col>{this.state.distance}</Col>
         </Row>
         {this.insertBreak()}
         <Row>
@@ -100,7 +107,7 @@ class OrderConfirmation extends Component {
     return (
       <div>
         <Row>
-          <MapContainer address={this.state.address} />
+          <MapContainer address={this.state.address} getDistance={this.setDistance.bind(this)} />
         </Row>
         <Row>
           {/* <DistanceMap

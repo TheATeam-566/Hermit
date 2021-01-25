@@ -30,7 +30,8 @@ class DistanceMap extends Component {
             distance: response.rows[0].elements[0].distance.text,
             address: response.destinationAddresses[0],
           });
-          exportDist = this.state.distance;
+          //need this to call parent function to set distance in parent
+          this.props.getDistance(this.state.distance);
         }
       }
     );
