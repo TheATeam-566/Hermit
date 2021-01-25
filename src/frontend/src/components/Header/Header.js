@@ -64,12 +64,14 @@ class Header extends React.Component {
   renderAvatar = () => {
     return (
       <>
-        <Image
-          className="profile-header-img"
-          src={`${this.state.userInfo.image}`}
-          alt="User Avatar"
-          roundedCircle
-        />
+        <Link to="/user">
+          <Image
+            className="profile-header-img"
+            src={`${this.state.userInfo.image}`}
+            alt="User Avatar"
+            roundedCircle
+          />
+        </Link>
       </>
     );
   };
