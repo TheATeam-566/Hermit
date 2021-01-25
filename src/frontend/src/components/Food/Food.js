@@ -17,7 +17,7 @@ class Food extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <Container fluid>
           <Row>
             <Col xs={3}>
@@ -32,7 +32,7 @@ class Food extends Component {
             </Col>
           </Row>
         </Container>
-      </div>
+      </>
     );
   }
 }
