@@ -3,6 +3,8 @@ import { Button, Container, Col, Row, Image, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Basket } from 'react-bootstrap-icons';
 import CartModal from './CartModal';
+import { Route, Switch } from 'react-router-dom';
+
 import './Header.css';
 
 class Header extends React.Component {
@@ -64,12 +66,14 @@ class Header extends React.Component {
   renderAvatar = () => {
     return (
       <>
-        <Image
-          className="profile-header-img"
-          src={`${this.state.userInfo.image}`}
-          alt="User Avatar"
-          roundedCircle
-        />
+        <Link to="/user">
+          <Image
+            className="profile-header-img"
+            src={`${this.state.userInfo.image}`}
+            alt="User Avatar"
+            roundedCircle
+          />
+        </Link>
       </>
     );
   };
