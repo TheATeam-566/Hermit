@@ -1,32 +1,26 @@
 /* global google */
 import React, { Component } from 'react';
+let exportDist = '';
 
 class DistanceMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userAddr: null,
-      cheeseCake: null,
       distance: null,
+      address: this.props.address,
+      origin: this.props.origin,
+      travelMode: this.props.travelMode,
     };
     this.onScriptLoad = this.onScriptLoad.bind(this);
   }
 
   onScriptLoad() {
-    const origin = '3401+Dufferin+Street+North+York';
-    const destination = '960+McCowan+Road+Scarborough';
-
-    this.setState({
-      userAddr: destination,
-      cheeseCake: origin,
-    });
-
     let service = new google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
       {
-        origins: [origin],
-        destinations: [destination],
-        travelMode: 'DRIVING',
+        origins: [this.state.origin],
+        destinations: [this.state.address],
+        travelMode: this.state.travelMode,
       },
       (response, status) => {
         if (status !== 'OK') {
@@ -34,9 +28,9 @@ class DistanceMap extends Component {
         } else {
           this.setState({
             distance: response.rows[0].elements[0].distance.text,
-            userAddr: response.destinationAddresses[0],
+            address: response.destinationAddresses[0],
           });
-          console.log(response);
+          exportDist = this.state.distance;
         }
       }
     );
@@ -44,7 +38,13 @@ class DistanceMap extends Component {
 
   componentDidMount() {
     if (!window.google) {
-      window.addEventListener('load', (e) => {
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.src =
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyCmLgpiiClR8g_H_BILfIPYMqyM1efck6s&libraries=geometry,drawing,places';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+      s.addEventListener('load', (e) => {
         this.onScriptLoad();
       });
     } else {
@@ -54,14 +54,14 @@ class DistanceMap extends Component {
 
   render() {
     return (
-      <div style={{ width: 500, height: 500 }} id={this.props.id}>
+      <div style={{ width: 500, height: 500 }}>
         <br />
-        <label>Destination:{this.state.userAddr}</label>
+        <label>Destination:{this.state.address}</label>
         <br />
         <label>You are located {this.state.distance} away</label>
       </div>
     );
   }
 }
-
+export { exportDist };
 export default DistanceMap;

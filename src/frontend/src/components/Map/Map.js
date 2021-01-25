@@ -1,12 +1,11 @@
-/* global google */
 import React from 'react';
 import { withGoogleMap, GoogleMap, withScriptjs } from 'react-google-maps';
-import MapDirectionsRenderer from './MapDirectionsRenderer';
+import OuterDirections from './OuterDirections';
 
 const Map = withScriptjs(
-  withGoogleMap(() => (
+  withGoogleMap((props) => (
     <GoogleMap defaultCenter={{ lat: 43.653225, lng: -79.383186 }} defaultZoom={10}>
-      <MapDirectionsRenderer travelMode={google.maps.TravelMode.DRIVING} />
+      <OuterDirections address={props.address} />
     </GoogleMap>
   ))
 );

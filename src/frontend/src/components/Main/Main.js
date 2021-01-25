@@ -3,12 +3,12 @@ import { Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Food from '../Food/Food';
 import Footer from '../Footer/Footer';
-import OrderConfirmation from '../orderConfirmation/OrderConfirmation';
+import OrderConfirmation from '../OrderConfirmation/OrderConfirmation';
 
 class MainPage extends Component {
   // Receiving items added to cart, calculating total,
   // and sending total & cart to header for modal use.
-  state = { total: 0.0, cart: [] };
+  state = { total: 0.0, cart: [], address: '69+Black+Hawk+Way+North+York' };
 
   receiveCart = (cart) => {
     this.setState({ cart: cart });
@@ -32,24 +32,23 @@ class MainPage extends Component {
   render() {
     return (
       <div className="mainpage">
+        <Header
+          total={this.state.total}
+          cart={this.state.cart}
+          receiveCartFromModal={this.receiveCartFromModal}
+        />
         <Route exact path="/">
-          <Header
-            total={this.state.total}
-            cart={this.state.cart}
-            receiveCartFromModal={this.receiveCartFromModal}
-          />
           <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
-          <Footer />
         </Route>
 
-        <Route exact path="/orderConfirmation">
-          <Header
-            total={this.state.total}
+        <Route exact path="/OrderConfirmation">
+          <OrderConfirmation
             cart={this.state.cart}
-            receiveCartFromModal={this.receiveCartFromModal}
+            address={this.state.address}
+            subTotal={this.state.total}
           />
-          <OrderConfirmation />
         </Route>
+        <Footer />
       </div>
     );
   }

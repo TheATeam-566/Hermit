@@ -1,25 +1,62 @@
 import React, { Component } from 'react';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Button, ListGroup, Image, Container, Col, Row } from 'react-bootstrap';
+import { PlusCircleFill, DashCircleFill } from 'react-bootstrap-icons';
 import MapContainer from '../Map/MapContainer';
 import DistanceMap from '../Map/DistanceMap';
 
 class OrderConfirmation extends Component {
+  state = {
+    address: this.props.address,
+    cart: this.props.cart,
+    subTotal: this.props.subTotal,
+    distance: null,
+  };
+
   renderCartReview = () => {
     return (
-      <Row>
-        {/*THIS NEEDS TO BE CHANGED TO TAKE IN DYNAMIC VALUES */}
-        <Col>
-          <img
-            src="https://www.thecheesecakefactory.com/assets/images/Menu-Import/CCF_Social_TossedGreenSalad.jpg"
-            alt="salad"
-            width="150"
-            height="150"
-          />
-        </Col>
-        <Col>Salad</Col>
-        <Col>X 1</Col>
-        <Col>$ 20</Col>
-      </Row>
+      <>
+        {this.state.cart.map((food) => (
+          <ListGroup>
+            <ListGroup.Item key={food}>
+              <Container fluid>
+                <Row>
+                  <Col>
+                    <Image
+                      src={`${food.image}`}
+                      alt={`${food.caption}`}
+                      width="150"
+                      height="150"
+                      rounded
+                    />
+                  </Col>
+                  <Col xs={6}>
+                    <br />
+                    <br />
+                    {String(food.caption)}
+                    <br />
+                    {'A delicious item 🦆'}
+                    <br />${String(food.price)}
+                    <br />
+                  </Col>
+                  <Col>
+                    <br />
+                    <br />
+                    <Button variant="danger" onClick={(e) => this.onDecreaseQuantity(e, food)}>
+                      <DashCircleFill />
+                    </Button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button variant="success" onClick={(e) => this.onIncreaseQuantity(e, food)}>
+                      <PlusCircleFill />
+                    </Button>
+                    <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{food.quantity}</h2>
+                  </Col>
+                </Row>
+              </Container>
+            </ListGroup.Item>
+            <hr />
+          </ListGroup>
+        ))}
+      </>
     );
   };
 
@@ -28,7 +65,7 @@ class OrderConfirmation extends Component {
       <Row>
         <Col>Sub Total: </Col>
         {/*THIS NEEDS TO BE CHANGED TO TAKE IN DYNAMIC VALUES */}
-        <Col md={3}> $40</Col>
+        <Col md={3}> {this.state.subTotal}</Col>
       </Row>
     );
   };
@@ -63,10 +100,14 @@ class OrderConfirmation extends Component {
     return (
       <div>
         <Row>
-          <MapContainer />
+          <MapContainer address={this.state.address} />
         </Row>
         <Row>
-          <Col><DistanceMap /></Col>
+          {/* <DistanceMap
+            address={this.state.address}
+            origin="3401+Dufferin+Street+North+York"
+            travelMode="DRIVING"
+          ></DistanceMap> */}
         </Row>
       </div>
     );
@@ -96,8 +137,6 @@ class OrderConfirmation extends Component {
     return (
       // TEMP
       <Container fluid="md">
-        {this.renderCartReview()}
-        {this.insertBreak()}
         {this.renderCartReview()}
         {this.insertBreak()}
         <hr></hr>
