@@ -3,7 +3,6 @@ import { Button, Container, Col, Row, Image, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Basket } from 'react-bootstrap-icons';
 import CartModal from './CartModal';
-
 import './Header.css';
 
 class Header extends React.Component {
