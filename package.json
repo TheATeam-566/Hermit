@@ -24,8 +24,8 @@
     "google-map-react": "^2.1.9",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
-    "react-google-maps": "^9.4.5",
-    "serve": "^11.3.2"
+    "serve": "^11.3.2",
+    "stripe": "^8.132.0"
   },
   "devDependencies": {
     "eslint": "^7.15.0",

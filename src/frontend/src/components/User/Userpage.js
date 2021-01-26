@@ -13,6 +13,7 @@ class Userpage extends Component {
   fNameChange = this.fNameChange.bind(this);
   lNameChange = this.lNameChange.bind(this);
   addressChange = this.addressChange.bind(this);
+  cityChange = this.cityChange.bind(this);
   avatarUrlChange = this.avatarUrlChange.bind(this);
   emailChange = this.emailChange.bind(this);
 
@@ -50,6 +51,12 @@ class Userpage extends Component {
     });
   }
 
+  cityChange(e) {
+    this.setState({
+      userInfo: { ...this.state.userInfo, city: e.target.value },
+    });
+  }
+
   avatarUrlChange(e) {
     this.setState({
       userInfo: { ...this.state.userInfo, image: e.target.value },
@@ -74,7 +81,7 @@ class Userpage extends Component {
       },
       body: JSON.stringify(user),
     };
-
+    this.props.receiveUserInfoFromUserPage(this.state.userInfo);
     await fetch('/user/update', requestOptions);
     await this.setState({ showSubmitAlert: true });
   };
@@ -183,7 +190,8 @@ class Userpage extends Component {
   closeSubmitAlert = (e) => {
     e.preventDefault();
     this.setState({ showSubmitAlert: false });
-    window.location.reload();
+    // window.location.reload();
+    // window.location.href = 'https://localhost:3000/user';
   };
 
   // Closes the update confirmation alert panel
@@ -256,6 +264,22 @@ class Userpage extends Component {
                   name="address"
                   value={this.state.userInfo.address}
                   onChange={this.addressChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <Form.Group>
+                <Form.Label>City</Form.Label>
+                <Form.Control
+                  placeholder="Please enter your city"
+                  type="text"
+                  name="city"
+                  value={this.state.userInfo.city}
+                  onChange={this.cityChange}
                   required
                 />
               </Form.Group>

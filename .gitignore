@@ -6,6 +6,9 @@ oauthKey.js
 keys.js
 cert.pem
 key.pem
+.env
+.env.production
+.env.development
 
 # dependencies
 node_modules/
