@@ -7,6 +7,7 @@ const keys = require('./config/keys');
 const passport = require('./services/passport');
 const menuRouter = require('./routes/menuRoutes');
 const oauthRouter = require('./routes/authRoutes');
+const orderRouter = require('./routes/orderConfirmation');
 const userRouter = require('./routes/userRoutes');
 
 const app = express();
@@ -32,6 +33,7 @@ app.use(bodyParser.json());
 app.use('/api/menu', menuRouter); // Use the menu api
 app.use('/submit', menuRouter); // Use the submit api fr
 app.use('/auth', oauthRouter); // Auth routes
+app.use('/orderConfirmation', orderRouter); // Order Confirmation
 app.use('/user', userRouter, cors());
 
 app.listen(PORT, () => console.log(`Express server started on port ${PORT}`));
