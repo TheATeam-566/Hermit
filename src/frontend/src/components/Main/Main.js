@@ -43,6 +43,44 @@ class MainPage extends Component {
     await this.setState({ cart: updatedCart, total: updatedTotal });
   };
 
+
+  // This method receives the updated cart and total from OrderConfirmation.js and then sets the state for Main.js
+  updateCartQuantities = async (updatedCart) => {
+    this.setState({ cart: updatedCart });
+    // Calculating the total of all the items within the updated cart.
+    let newTotal = 0;
+    this.state.cart.forEach((item) => {
+      newTotal += item.price * item.quantity;
+      return (newTotal = Number(newTotal.toFixed(2))); // Rounding the total to nearest cent
+    });
+
+    await this.setState({ total: newTotal });
+  };
+
+  receiveUserInfoFromUserPage = async (updatedUserInfo) => {
+    await this.setState({ userInfo: updatedUserInfo });
+  };
+
+  receiveTokenFromHeader = async (token) => {
+    await this.setState({ token: token });
+    await this.sendPayment(this.state.token);
+  };
+
+  // Call back function, received token from Header
+  sendPayment = async (token) => {
+    token = { ...token, amount: this.state.total };
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Header': '*',
+      },
+      body: JSON.stringify(token),
+    };
+    await fetch('/api/stripe', requestOptions);
+  };
+
   render() {
     return (
       <>
@@ -52,6 +90,9 @@ class MainPage extends Component {
           total={this.state.total}
           cart={this.state.cart}
           receiveCartFromModal={this.receiveCartFromModal}
+          sendPayment={this.sendPayment}
+          token={this.state.token}
+          receiveTokenFromHeader={this.receiveTokenFromHeader}
         />
         <Switch>
           <Route exact path="/user">
@@ -59,6 +100,7 @@ class MainPage extends Component {
               userInfo={this.state.userInfo}
               isLoggedIn={this.state.isLoggedIn}
               cart={this.state.cart}
+              receiveUserInfoFromUserPage={this.receiveUserInfoFromUserPage}
             />
           </Route>
           <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />

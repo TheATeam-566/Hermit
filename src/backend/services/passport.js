@@ -31,6 +31,7 @@ passport.use(
         image: profile._json.picture,
         auth: profile.provider,
         accessToken,
+        refreshToken,
         dateUserCreated: new Date().toLocaleString(),
       };
 

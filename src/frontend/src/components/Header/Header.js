@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Container, Col, Row, Image, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Basket } from 'react-bootstrap-icons';
+import Stripe from '../Stripe/Stripe';
 import CartModal from './CartModal';
 import './Header.css';
 
@@ -11,6 +12,7 @@ class Header extends React.Component {
     isLoggedIn: false,
     total: '0.00',
     cart: [],
+    token: {},
   };
 
   componentWillReceiveProps = async (nextProps) => {
@@ -40,6 +42,11 @@ class Header extends React.Component {
     await this.props.receiveCartFromModal(this.state.cart, this.state.total);
   };
 
+  receiveTokenFromStripe = (token) => {
+    this.setState({ token: token });
+    this.props.receiveTokenFromHeader(this.state.token);
+  };
+
   renderButtons = () => {
     if (!this.state.isLoggedIn) {
       return (
@@ -56,6 +63,16 @@ class Header extends React.Component {
           <Button variant="outline-danger" href="/auth/logout/">
             Sign Out
           </Button>
+          <Stripe
+            receiveTokenFromStripe={this.receiveTokenFromStripe}
+            amount={this.state.total}
+            name={this.state.userInfo.fName + ' ' + this.state.userInfo.lName}
+            currency="CAD"
+            email={this.state.userInfo.email}
+            shippingAddress={this.state.userInfo.address + ' ' + this.state.userInfo.city}
+            billingAddress={this.state.userInfo.address + ' ' + this.state.userInfo.city}
+            label="Checkout"
+          />
         </>
       );
     }
@@ -124,7 +141,11 @@ class Header extends React.Component {
               {this.renderAddress()}
               {this.renderButtons()}
             </Col>
-            <Col xs={6} md={4}></Col>
+            <Col xs={6} md={4}>
+              <Link to="/">
+                <Image src={'/hermit_white.png'} height="150" width="150" rounded />
+              </Link>
+            </Col>
             <Col xs={6} md={4} className="header-search-form">
               {this.renderBasketEmoji()}
               {this.renderSearchForm()}

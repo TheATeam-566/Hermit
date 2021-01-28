@@ -11,8 +11,9 @@ router.post('/update', async (req, res) => {
   const userRef = db.collection('users').doc(req.body.id);
 
   await userRef.update({
-    timestamp: FieldValue.serverTimestamp(),
+    lastUpdated: FieldValue.serverTimestamp(),
     address: req.body.address,
+    city: req.body.city,
     fName: req.body.fName,
     lName: req.body.lName,
     email: req.body.email,
