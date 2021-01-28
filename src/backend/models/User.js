@@ -11,6 +11,7 @@ class User {
     this.image = data.image ? data.image : null;
     this.auth = data.auth ? data.auth : null;
     this.accessToken = data.accessToken ? data.accessToken : null;
+    this.dateUserCreated = data.dateUserCreated;
   }
 }
 

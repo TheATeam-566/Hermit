@@ -148,8 +148,8 @@ class OrderConfirmation extends Component {
     this.calculateTax();
   };
 
-  calculateTax = () => {
-    this.setState({
+  calculateTax = async () => {
+    await this.setState({
       taxPrice:
         (this.state.deliveryFee + this.state.subTotal + this.state.serviceFee) * this.state.HST,
     });

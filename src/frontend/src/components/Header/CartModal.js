@@ -125,7 +125,7 @@ class CartModal extends React.Component {
     }
 
     return (
-      <div>
+      <>
         <Modal
           {...this.props}
           size="lg"
@@ -139,7 +139,7 @@ class CartModal extends React.Component {
           {this.renderModalBody()}
           <Modal.Footer>{this.renderButtons()}</Modal.Footer>
         </Modal>
-      </div>
+      </>
     );
   }
 }

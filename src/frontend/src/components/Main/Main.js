@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Header from '../Header/Header';
 import Food from '../Food/Food';
 import Footer from '../Footer/Footer';
 import OrderConfirmation from '../OrderConfirmation/OrderConfirmation';
+import Userpage from '../User/Userpage';
 
 class MainPage extends Component {
   // Receiving items added to cart, calculating total,
   // and sending total & cart to header for modal use.
-  state = { total: 0.0, cart: [], address: '69+Black+Hawk+Way' };
+  state = { userInfo: {}, isLoggedIn: false, total: 0.0, cart: [], address: '69+Black+Hawk+Way' };
+
+  componentDidMount = async () => {
+    await this.fetchUser();
+  };
+
+  fetchUser = async () => {
+    const response = await fetch('auth/current_user');
+    const userInfo = await response.json();
+    if (response.status === 200) {
+      this.setState({ userInfo: userInfo, isLoggedIn: true });
+    } else {
+      // TODO: Figure this out.
+    }
+  };
 
   receiveCart = (cart) => {
     this.setState({ cart: cart });
@@ -43,8 +58,10 @@ class MainPage extends Component {
 
   render() {
     return (
-      <div className="mainpage">
+      <>
         <Header
+          userInfo={this.state.userInfo}
+          isLoggedIn={this.state.isLoggedIn}
           total={this.state.total}
           cart={this.state.cart}
           receiveCartFromModal={this.receiveCartFromModal}
@@ -53,16 +70,26 @@ class MainPage extends Component {
           <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
         </Route>
 
-        <Route exact path="/OrderConfirmation">
-          <OrderConfirmation
-            cart={this.state.cart}
-            address={this.state.address}
-            subTotal={this.state.total}
-            updateCartQuantities={this.updateCartQuantities}
-          />
-        </Route>
+        <Switch>
+          <Route exact path="/OrderConfirmation">
+            <OrderConfirmation
+              cart={this.state.cart}
+              address={this.state.address}
+              subTotal={this.state.total}
+              updateCartQuantities={this.updateCartQuantities}
+            />
+          </Route>
+          <Route exact path="/user">
+            <Userpage
+              userInfo={this.state.userInfo}
+              isLoggedIn={this.state.isLoggedIn}
+              cart={this.state.cart}
+            />
+          </Route>
+          <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
+        </Switch>
         <Footer />
-      </div>
+      </>
     );
   }
 }
