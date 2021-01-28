@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import { Button, ListGroup, Image, Container, Col, Row } from 'react-bootstrap';
+import { Button, ListGroup, Image, Container, Col, Row, Table } from 'react-bootstrap';
 import { PlusCircleFill, DashCircleFill } from 'react-bootstrap-icons';
 import MapContainer from '../Map/MapContainer';
+import './OrderConfirmation.css';
 
 class OrderConfirmation extends Component {
   state = {
     address: this.props.address,
     cart: this.props.cart,
     subTotal: this.props.subTotal,
-    distance: null,
+    distance: 0,
+    serviceFee: 2.99,
+    distanceKm: 0,
+    distanceOver: 0,
+    deliveryFee: 2.99,
+    HST: 0.13,
+    taxPrice: 0,
+    totalPrice: 0,
   };
 
   renderCartReview = () => {
@@ -59,97 +67,175 @@ class OrderConfirmation extends Component {
     );
   };
 
-  renderSubTotal = () => {
-    return (
-      <Row>
-        <Col>Sub Total: </Col>
-        {/*THIS NEEDS TO BE CHANGED TO TAKE IN DYNAMIC VALUES */}
-        <Col md={3}> {this.state.subTotal}</Col>
-      </Row>
+  onDecreaseQuantity = async (e, food) => {
+    e.preventDefault();
+    // Find element in the cart array by caption and if found and quantity is not equal to 0, decrease the quantity of the element in the array by 1
+    this.state.cart.forEach(async (foodInCart) => {
+      if (foodInCart.caption === food.caption && foodInCart.quantity > 0) {
+        this.setState({ foodInCart: (foodInCart.quantity -= 1) });
+        await this.props.updateCartQuantities(this.state.cart);
+        let newTotal = 0;
+        this.state.cart.forEach((item) => {
+          newTotal += item.price * item.quantity;
+          return (newTotal = Number(newTotal.toFixed(2))); // Rounding the total to nearest cent
+        });
+
+        await this.setState({ subTotal: newTotal });
+        this.calculateTotal();
+      }
+
+      if (foodInCart.quantity === 0) {
+        this.setState(await { cart: this.state.cart.filter((item) => item.quantity !== 0) });
+        await this.props.updateCartQuantities(this.state.cart);
+      }
+    });
+  };
+
+  onIncreaseQuantity = async (e, food) => {
+    e.preventDefault();
+    // Find the element in the cart array by caption and if found and quantity is not equal to 0, increase the quantity of the element in the array by 1
+    this.state.cart.forEach(async (foodInCart) => {
+      if (foodInCart.caption === food.caption) {
+        this.setState({ foodInCart: (foodInCart.quantity += 1) });
+        await this.props.updateCartQuantities(this.state.cart);
+        let newTotal = 0;
+        this.state.cart.forEach((item) => {
+          newTotal += item.price * item.quantity;
+          return (newTotal = Number(newTotal.toFixed(2))); // Rounding the total to nearest cent
+        });
+
+        await this.setState({ subTotal: newTotal });
+        this.calculateTotal();
+      }
+    });
+  };
+
+  setDistance = async (newDistance) => {
+    await this.setState(
+      {
+        distance: newDistance,
+      },
+      () => {
+        if (this.state.distance !== 0) {
+          this.setDistanceKm();
+        }
+      }
     );
   };
 
-  setDistance = (newDistance) => {
+  setDistanceKm = async () => {
+    await this.setState(
+      {
+        distanceKm: this.state.distance / 1000,
+      },
+      () => {
+        if (this.state.distanceKm !== 0) {
+          this.calculateDeliverFee();
+        }
+      }
+    );
+  };
+
+  calculateDeliverFee = async () => {
+    if (this.state.distanceKm > 5) {
+      await this.setState({
+        distanceOver: this.state.distanceKm - 5,
+      });
+      this.setState({
+        deliveryFee: 2.99 + this.state.distanceOver * 0.25,
+      });
+    }
+    this.calculateTax();
+  };
+
+  calculateTax = () => {
     this.setState({
-      distance: newDistance,
+      taxPrice:
+        (this.state.deliveryFee + this.state.subTotal + this.state.serviceFee) * this.state.HST,
     });
-    //REMOVE THIS BEFORE COMMIT
-    console.log('DISTANCE FROM OrderConfirmation: ', this.state.distance);
+    this.calculateTotal();
+  };
+
+  calculateTotal = async () => {
+    this.setState({
+      totalPrice:
+        this.state.subTotal + this.state.serviceFee + this.state.deliveryFee + this.state.taxPrice,
+    });
   };
 
   renderPriceBreakdown = () => {
     return (
-      <div>
+      <>
         <Row>
-          <Col>Service Fee: </Col>
-          <Col>$2.99</Col>
+          <Table striped borderless hover variant="light" className="table-fill">
+            <tbody className="table-hover">
+              <tr>
+                <td className="text-left">Sub Total:</td>
+                <td className="text-left">${this.state.subTotal}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Service Fee: </td>
+                <td className="text-left">${this.state.serviceFee}</td>
+              </tr>
+              <tr>
+                <td className="text-left">Delivery Fee: </td>
+                <td className="text-left">${this.state.deliveryFee.toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td className="text-left">HST: </td>
+                <td className="text-left">${this.state.taxPrice.toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td className="text-left" style={{ fontWeight: 800 }}>
+                  Total:
+                </td>
+                <td className="text-left" style={{ fontWeight: 800 }}>
+                  ${this.state.totalPrice.toFixed(2)}
+                </td>
+              </tr>
+            </tbody>
+          </Table>
         </Row>
-        {this.insertBreak()}
+        <br />
+        <br />
         <Row>
-          <Col>Delivery Fee: </Col>
-          <Col>{this.state.distance}</Col>
+          <Col></Col>
+          <Col>
+            <Button variant="primary" href="#">
+              Pay Now
+            </Button>
+          </Col>
+          <Col></Col>
         </Row>
-        {this.insertBreak()}
-        <Row>
-          <Col>HST: </Col>
-          <Col>$14.69</Col>
-        </Row>
-        {this.insertBreak()}
-        <Row>
-          <Col>Total: </Col>
-          <Col>$69.40</Col>
-        </Row>
-      </div>
+      </>
     );
   };
 
   renderMapView = () => {
     return (
-      <div>
+      this.setDistanceKm && (
         <Row>
           <MapContainer address={this.state.address} getDistance={this.setDistance.bind(this)} />
         </Row>
-        <Row>
-          {/* <DistanceMap
-            address={this.state.address}
-            origin="3401+Dufferin+Street+North+York"
-            travelMode="DRIVING"
-          ></DistanceMap> */}
-        </Row>
-      </div>
+      )
     );
   };
 
   renderBottomView = () => {
     return (
-      <div>
-        <Row>
-          <Col>{this.renderMapView()}</Col>
-          <Col>{this.renderPriceBreakdown()}</Col>
-        </Row>
-      </div>
-    );
-  };
-
-  insertBreak = () => {
-    return (
       <Row>
-        <br></br>
+        <Col>{this.renderMapView()}</Col>
+        <Col>{this.renderPriceBreakdown()}</Col>
       </Row>
     );
   };
 
   render() {
-    /*THIS NEEDS TO BE CHANGED TO TAKE IN DYNAMIC NUMBER OF FOOD ITEMS IN CART */
     return (
-      // TEMP
       <Container fluid="md">
         {this.renderCartReview()}
-        {this.insertBreak()}
         <hr></hr>
-        {this.renderSubTotal()}
-        {this.insertBreak()}
-
+        <br />
         {this.renderBottomView()}
       </Container>
     );

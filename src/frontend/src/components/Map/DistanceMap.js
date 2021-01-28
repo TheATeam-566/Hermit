@@ -1,6 +1,6 @@
 /* global google */
 import React, { Component } from 'react';
-let exportDist = '';
+import { Table } from 'react-bootstrap';
 
 class DistanceMap extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class DistanceMap extends Component {
           alert('Error was: ' + status);
         } else {
           this.setState({
-            distance: response.rows[0].elements[0].distance.text,
+            distance: response.rows[0].elements[0].distance.value,
             address: response.destinationAddresses[0],
           });
           //need this to call parent function to set distance in parent
@@ -55,14 +55,30 @@ class DistanceMap extends Component {
 
   render() {
     return (
-      <div style={{ width: 500, height: 500 }}>
-        <br />
-        <label>Destination:{this.state.address}</label>
-        <br />
-        <label>You are located {this.state.distance} away</label>
-      </div>
+      <>
+        <Table className="distance-table" striped borderless hover size="sm" variant="light">
+          <tbody>
+            <tr>
+              <td className="distance-font">
+                <b style={{ fontWeight: 500 }}>Delivery Address:</b>
+              </td>
+              <td className="distance-font">{this.state.address}</td>
+            </tr>
+          </tbody>
+        </Table>
+        <Table className="distance-table" striped borderless hover size="sm" variant="light">
+          <tbody>
+            <tr>
+              <td className="distance-font">
+                You are located{' '}
+                <b style={{ fontWeight: 500 }}>{(this.state.distance / 1000).toFixed(2)}</b> km away
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </>
     );
   }
 }
-export { exportDist };
+
 export default DistanceMap;
