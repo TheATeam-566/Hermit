@@ -46,30 +46,30 @@ class FoodCard extends Component {
   renderButtons = (item) => {
     if (item.price) {
       return (
-        <div>
+        <>
           <Card.Text>${item.price}</Card.Text>
           <Button variant="primary" onClick={(e) => this.clickHandler(e, item)}>
             Add to Cart
           </Button>
-        </div>
+        </>
       );
     } else if (!item.price) {
       return (
-        <div>
+        <>
           <Card.Text>No Price</Card.Text>
           <Button variant="secondary" disabled>
             Add to Cart
           </Button>
-        </div>
+        </>
       );
     }
   };
 
   renderCategories = () => {
     return (
-      <div>
+      <>
         {Object.values(this.state.items).map((item) => (
-          <div className="category-mainpage-info">
+          <>
             <Card style={{ width: '18rem' }}>
               <Card.Img variant="top" src={item.image} />
               <Card.Body>
@@ -78,14 +78,14 @@ class FoodCard extends Component {
                 {this.renderButtons(item)}
               </Card.Body>
             </Card>
-          </div>
+          </>
         ))}
-      </div>
+      </>
     );
   };
 
   render() {
-    return <div>{this.renderCategories()}</div>;
+    return <>{this.renderCategories()}</>;
   }
 }
 

@@ -1,4 +1,5 @@
 const passport = require('passport');
+
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User');
 const oauthKeys = require('../config/keys');
@@ -30,6 +31,7 @@ passport.use(
         image: profile._json.picture,
         auth: profile.provider,
         accessToken,
+        dateUserCreated: new Date().toLocaleString(),
       };
 
       // create a new user object using the data object created above

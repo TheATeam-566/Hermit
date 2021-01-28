@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import Header from '../Header/Header';
 import Food from '../Food/Food';
 import Footer from '../Footer/Footer';
+import Userpage from '../User/Userpage';
 
 class MainPage extends Component {
   // Receiving items added to cart, calculating total,
   // and sending total & cart to header for modal use.
-  state = { total: 0.0, cart: [] };
+  state = { userInfo: {}, isLoggedIn: false, total: 0.0, cart: [] };
+
+  componentDidMount = async () => {
+    await this.fetchUser();
+  };
+
+  fetchUser = async () => {
+    const response = await fetch('auth/current_user');
+    const userInfo = await response.json();
+    if (response.status === 200) {
+      this.setState({ userInfo: userInfo, isLoggedIn: true });
+    } else {
+      // TODO: Figure this out.
+    }
+  };
 
   receiveCart = (cart) => {
     this.setState({ cart: cart });
@@ -29,15 +45,26 @@ class MainPage extends Component {
 
   render() {
     return (
-      <div className="mainpage">
+      <>
         <Header
+          userInfo={this.state.userInfo}
+          isLoggedIn={this.state.isLoggedIn}
           total={this.state.total}
           cart={this.state.cart}
           receiveCartFromModal={this.receiveCartFromModal}
         />
-        <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
+        <Switch>
+          <Route exact path="/user">
+            <Userpage
+              userInfo={this.state.userInfo}
+              isLoggedIn={this.state.isLoggedIn}
+              cart={this.state.cart}
+            />
+          </Route>
+          <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
+        </Switch>
         <Footer />
-      </div>
+      </>
     );
   }
 }
