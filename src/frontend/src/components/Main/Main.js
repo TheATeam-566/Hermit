@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 import Food from '../Food/Food';
 import Footer from '../Footer/Footer';
 import Userpage from '../User/Userpage';
-import OrderConfirmation from '../orderConfirmation/OrderConfirmation';
+import OrderConfirmation from '../OrderConfirmation/OrderConfirmation';
 
 class MainPage extends Component {
   // Receiving items added to cart, calculating total,
