@@ -8,7 +8,7 @@ import Userpage from '../User/Userpage';
 class MainPage extends Component {
   // Receiving items added to cart, calculating total,
   // and sending total & cart to header for modal use.
-  state = { userInfo: {}, isLoggedIn: false, total: 0.0, cart: [] };
+  state = { userInfo: {}, isLoggedIn: false, total: 0.0, cart: [], address: '69+Black+Hawk+Drive' };
 
   componentDidMount = async () => {
     await this.fetchUser();
@@ -42,7 +42,6 @@ class MainPage extends Component {
   receiveCartFromModal = async (updatedCart, updatedTotal) => {
     await this.setState({ cart: updatedCart, total: updatedTotal });
   };
-
 
   // This method receives the updated cart and total from OrderConfirmation.js and then sets the state for Main.js
   updateCartQuantities = async (updatedCart) => {
