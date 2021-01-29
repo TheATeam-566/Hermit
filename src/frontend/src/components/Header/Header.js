@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Container, Col, Row, Image, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Basket } from 'react-bootstrap-icons';
-import Stripe from '../Stripe/Stripe';
 import CartModal from './CartModal';
 import './Header.css';
 
