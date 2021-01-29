@@ -4,11 +4,12 @@ import Header from '../Header/Header';
 import Food from '../Food/Food';
 import Footer from '../Footer/Footer';
 import Userpage from '../User/Userpage';
+import OrderConfirmation from '../orderConfirmation/OrderConfirmation';
 
 class MainPage extends Component {
   // Receiving items added to cart, calculating total,
   // and sending total & cart to header for modal use.
-  state = { userInfo: {}, isLoggedIn: false, total: 0.0, cart: [] };
+  state = { userInfo: {}, isLoggedIn: false, total: 0.0, cart: [], address: '69+Black+Hawk+Way' };
 
   componentDidMount = async () => {
     await this.fetchUser();
@@ -42,7 +43,6 @@ class MainPage extends Component {
   receiveCartFromModal = async (updatedCart, updatedTotal) => {
     await this.setState({ cart: updatedCart, total: updatedTotal });
   };
-
 
   // This method receives the updated cart and total from OrderConfirmation.js and then sets the state for Main.js
   updateCartQuantities = async (updatedCart) => {
@@ -103,6 +103,18 @@ class MainPage extends Component {
               receiveUserInfoFromUserPage={this.receiveUserInfoFromUserPage}
             />
           </Route>
+          <Route
+            exact
+            path="/order"
+            render={() => (
+              <OrderConfirmation
+                cart={this.state.cart}
+                address={this.state.address}
+                subTotal={this.state.total}
+                updateCartQuantities={this.updateCartQuantities}
+              />
+            )}
+          />
           <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
         </Switch>
         <Footer />
