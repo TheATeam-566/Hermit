@@ -8,7 +8,9 @@ class Stripe extends Component {
         <StripeCheckout
           amount={this.props.amount * 100}
           token={(token) => this.props.receiveTokenFromStripe(token)}
-          stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
+          stripeKey={
+            'pk_test_51I8Y7uGynRV7QxZ9uA7aadky2oZi8M8BK7XjXa3nXx2xSBAwB6zbIoJ0RoBmxZ23GqdGgMZnzYZ1nJ6y0Btl6A8M00oH5JQ2O1'
+          } // publishable key
           name={this.props.name}
           currency={this.props.currency}
           email={this.props.email}
