@@ -112,7 +112,9 @@ class CartModal extends React.Component {
       return (
         <>
           <Link to="/order">
-            <Button to="#">Proceed to Checkout</Button>
+            <Button to="#" onClick={this.onClose}>
+              Proceed to Checkout
+            </Button>
           </Link>
         </>
       );
