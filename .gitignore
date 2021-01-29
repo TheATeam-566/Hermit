@@ -6,12 +6,16 @@ oauthKey.js
 keys.js
 cert.pem
 key.pem
+.env
+.env.production
+.env.development
 
 # dependencies
 node_modules/
 /.pnp
 .pnp.js
 .eslintcache
+package-lock.json/
 
 # testing
 /coverage

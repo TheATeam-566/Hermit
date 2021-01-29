@@ -2,18 +2,26 @@ import React from 'react';
 import { Button, Container, Col, Row, Image, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Basket } from 'react-bootstrap-icons';
+import Stripe from '../Stripe/Stripe';
 import CartModal from './CartModal';
 import './Header.css';
 
 class Header extends React.Component {
-  state = { avatarURL: '', name: '', address: '', isLoggedIn: false, total: '0.00', cart: [] };
-
-  componentDidMount = async () => {
-    await this.fetchUser();
+  state = {
+    userInfo: {},
+    isLoggedIn: false,
+    total: '0.00',
+    cart: [],
+    token: {},
   };
 
   componentWillReceiveProps = async (nextProps) => {
-    await this.setState({ total: nextProps.total, cart: nextProps.cart });
+    this.setState({
+      total: nextProps.total,
+      cart: nextProps.cart,
+      userInfo: nextProps.userInfo,
+      isLoggedIn: nextProps.isLoggedIn,
+    });
   };
 
   // This method is called by CartModal.js whenever quantity is updated within the Modal.
@@ -34,82 +42,91 @@ class Header extends React.Component {
     await this.props.receiveCartFromModal(this.state.cart, this.state.total);
   };
 
-  fetchUser = async () => {
-    const response = await fetch('auth/current_user');
-    const userInfo = await response.json();
-
-    const avatarURL = userInfo.image;
-    const name = userInfo.fName + ' ' + userInfo.lName;
-    const address = userInfo.address;
-
-    this.setState({ avatarURL: avatarURL, name: name, address: address, isLoggedIn: true });
+  receiveTokenFromStripe = (token) => {
+    this.setState({ token: token });
+    this.props.receiveTokenFromHeader(this.state.token);
   };
 
   renderButtons = () => {
     if (!this.state.isLoggedIn) {
       return (
-        <div>
+        <>
           <br />
           <Button variant="primary" href="/auth/google/">
             Sign In
           </Button>
-        </div>
+        </>
       );
     } else {
       return (
-        <div>
+        <>
           <Button variant="outline-danger" href="/auth/logout/">
             Sign Out
           </Button>
-        </div>
+          <Stripe
+            receiveTokenFromStripe={this.receiveTokenFromStripe}
+            amount={this.state.total}
+            name={this.state.userInfo.fName + ' ' + this.state.userInfo.lName}
+            currency="CAD"
+            email={this.state.userInfo.email}
+            shippingAddress={this.state.userInfo.address + ' ' + this.state.userInfo.city}
+            billingAddress={this.state.userInfo.address + ' ' + this.state.userInfo.city}
+            label="Checkout"
+          />
+        </>
       );
     }
   };
 
   renderAvatar = () => {
     return (
-      <div>
-        <Image
-          className="profile-header-img"
-          src={`${this.state.avatarURL}`}
-          alt="User Avatar"
-          roundedCircle
-        />
-      </div>
+      <>
+        <Link to="/user">
+          <Image
+            className="profile-header-img"
+            src={`${this.state.userInfo.image}`}
+            alt="User Avatar"
+            roundedCircle
+          />
+        </Link>
+      </>
     );
   };
 
   renderName = () => {
-    return (
-      <div>
-        <h3>{this.state.name}</h3>
-      </div>
-    );
+    // if we're still waiting on async to return, do nothing
+    if (this.state.userInfo.fName || this.state.userInfo.lName) {
+      return (
+        <>
+          <h3>{this.state.userInfo.fName + ' ' + this.state.userInfo.lName}</h3>
+        </>
+      );
+    }
   };
 
   renderAddress = () => {
-    if (this.state.address) {
+    if (this.state.userInfo.address) {
       return (
-        <div>
-          <h6>{this.state.address}</h6>
-        </div>
+        <>
+          <h6>{this.state.userInfo.address}</h6>
+        </>
       );
-    } else if (!this.state.address && this.state.isLoggedIn) {
+    } else if (!this.state.userInfo.address && this.state.isLoggedIn) {
       return (
-        <div>
+        <>
           <h6>
-            <Link to="#">No address.</Link>
+            <Link to="/user">No address.</Link>
           </h6>
-        </div>
+        </>
       );
     }
   };
 
   renderSearchForm = () => {
     return (
-      <div>
+      <>
         <Form.Control type="text" placeholder="Find your fave..." readOnly />
-      </div>
+      </>
     );
   };
 
@@ -124,7 +141,11 @@ class Header extends React.Component {
               {this.renderAddress()}
               {this.renderButtons()}
             </Col>
-            <Col xs={6} md={4}></Col>
+            <Col xs={6} md={4}>
+              <Link to="/">
+                <Image src={'/hermit_white.png'} height="150" width="150" rounded />
+              </Link>
+            </Col>
             <Col xs={6} md={4} className="header-search-form">
               {this.renderBasketEmoji()}
               {this.renderSearchForm()}
@@ -159,7 +180,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         {this.renderCurrentUser()}
         <CartModal
           onClose={this.showModal}
@@ -167,7 +188,7 @@ class Header extends React.Component {
           children={this.state.cart}
           updateCartQuantities={this.updateCartQuantities}
         />
-      </div>
+      </>
     );
   }
 }
