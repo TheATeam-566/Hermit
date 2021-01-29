@@ -70,7 +70,7 @@ class DistanceMap extends Component {
           <tbody>
             <tr>
               <td className="distance-font">
-                You are located {' '}
+                You are located{' '}
                 <b style={{ fontWeight: 500 }}>{(this.state.distance / 1000).toFixed(2)}</b> km away
               </td>
             </tr>

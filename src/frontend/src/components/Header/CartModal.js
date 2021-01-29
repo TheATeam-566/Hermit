@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Button, ListGroup, Image, Container, Col, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { PlusCircleFill, DashCircleFill } from 'react-bootstrap-icons';
 
 class CartModal extends React.Component {
@@ -110,7 +111,9 @@ class CartModal extends React.Component {
     if (this.state.cart.length > 0) {
       return (
         <>
-          <Button to="#">Proceed to Checkout</Button>
+          <Link to="/order">
+            <Button to="#">Proceed to Checkout</Button>
+          </Link>
         </>
       );
     }

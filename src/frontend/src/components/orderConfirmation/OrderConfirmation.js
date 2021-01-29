@@ -82,6 +82,7 @@ class OrderConfirmation extends Component {
 
         await this.setState({ subTotal: newTotal });
         this.calculateTotal();
+        this.calculateTax();
       }
 
       if (foodInCart.quantity === 0) {
@@ -106,6 +107,7 @@ class OrderConfirmation extends Component {
 
         await this.setState({ subTotal: newTotal });
         this.calculateTotal();
+        this.calculateTax();
       }
     });
   };
