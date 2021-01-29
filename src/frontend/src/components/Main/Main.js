@@ -8,7 +8,7 @@ import OrderConfirmation from '../OrderConfirmation/OrderConfirmation';
 class MainPage extends Component {
   // Receiving items added to cart, calculating total,
   // and sending total & cart to header for modal use.
-  state = { total: 0.0, cart: [], address: '69+Black+Hawk+Way' };
+  state = { total: 0.0, cart: [], address: '69+Black+Hawk+Drive' };
 
   receiveCart = (cart) => {
     this.setState({ cart: cart });

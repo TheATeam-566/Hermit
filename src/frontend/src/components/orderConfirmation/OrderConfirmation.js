@@ -55,7 +55,7 @@ class OrderConfirmation extends Component {
                     <Button variant="success" onClick={(e) => this.onIncreaseQuantity(e, food)}>
                       <PlusCircleFill />
                     </Button>
-                    <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{food.quantity}</h2>
+                    <h2>&nbsp;&nbsp;&nbsp;&nbsp;{food.quantity}</h2>
                   </Col>
                 </Row>
               </Container>

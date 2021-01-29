@@ -7,7 +7,7 @@ const Map = compose(
   withProps((props) => ({
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyCmLgpiiClR8g_H_BILfIPYMqyM1efck6s&libraries=geometry,drawing,places',
-    loadingElement: <div style={{ height: '100%' }} />,
+    loadingElement: <div style={{ height: '99%' }} />,
     containerElement: <div style={{ height: '40vh', width: '22vw' }} />,
     mapElement: <div style={{ height: '80%' }} />,
     address: props.address,
