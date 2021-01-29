@@ -9,7 +9,13 @@ import OrderConfirmation from '../OrderConfirmation/OrderConfirmation';
 class MainPage extends Component {
   // Receiving items added to cart, calculating total,
   // and sending total & cart to header for modal use.
-  state = { userInfo: {}, isLoggedIn: false, total: 0.0, cart: [], address: '69+Black+Hawk+Way' };
+  state = {
+    userInfo: {},
+    isLoggedIn: false,
+    total: 0.0,
+    cart: [],
+    address: '',
+  };
 
   componentDidMount = async () => {
     await this.fetchUser();
@@ -61,7 +67,7 @@ class MainPage extends Component {
     await this.setState({ userInfo: updatedUserInfo });
   };
 
-  receiveTokenFromHeader = async (token) => {
+  receiveTokenFromOrderConfirmation = async (token) => {
     await this.setState({ token: token });
     await this.sendPayment(this.state.token);
   };
@@ -90,9 +96,6 @@ class MainPage extends Component {
           total={this.state.total}
           cart={this.state.cart}
           receiveCartFromModal={this.receiveCartFromModal}
-          sendPayment={this.sendPayment}
-          token={this.state.token}
-          receiveTokenFromHeader={this.receiveTokenFromHeader}
         />
         <Switch>
           <Route exact path="/user">
@@ -108,10 +111,15 @@ class MainPage extends Component {
             path="/order"
             render={() => (
               <OrderConfirmation
+                userInfo={this.state.userInfo}
+                isLoggedIn={this.state.isLoggedIn}
                 cart={this.state.cart}
-                address={this.state.address}
+                address={this.state.userInfo.address}
                 subTotal={this.state.total}
                 updateCartQuantities={this.updateCartQuantities}
+                sendPayment={this.sendPayment}
+                token={this.state.token}
+                receiveTokenFromOrderConfirmation={this.receiveTokenFromOrderConfirmation}
               />
             )}
           />

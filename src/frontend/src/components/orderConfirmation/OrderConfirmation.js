@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { Button, ListGroup, Image, Container, Col, Row, Table } from 'react-bootstrap';
 import { PlusCircleFill, DashCircleFill } from 'react-bootstrap-icons';
 import MapContainer from '../Map/MapContainer';
+import Stripe from '../Stripe/Stripe';
 import './OrderConfirmation.css';
 
 class OrderConfirmation extends Component {
   state = {
+    userInfo: this.props.userInfo,
+    isLoggedIn: this.props.isLoggedIn,
     address: this.props.address,
     cart: this.props.cart,
     subTotal: this.props.subTotal,
@@ -17,6 +20,7 @@ class OrderConfirmation extends Component {
     HST: 0.13,
     taxPrice: 0,
     totalPrice: 0,
+    token: {},
   };
 
   renderCartReview = () => {
@@ -81,8 +85,8 @@ class OrderConfirmation extends Component {
         });
 
         await this.setState({ subTotal: newTotal });
-        this.calculateTotal();
         this.calculateTax();
+        this.calculateTotal();
       }
 
       if (foodInCart.quantity === 0) {
@@ -106,8 +110,8 @@ class OrderConfirmation extends Component {
         });
 
         await this.setState({ subTotal: newTotal });
-        this.calculateTotal();
         this.calculateTax();
+        this.calculateTotal();
       }
     });
   };
@@ -165,6 +169,30 @@ class OrderConfirmation extends Component {
     });
   };
 
+  receiveTokenFromStripe = (token) => {
+    this.setState({ token: token });
+    this.props.receiveTokenFromOrderConfirmation(this.state.token);
+  };
+
+  renderCheckoutButton = () => {
+    if (this.state.isLoggedIn) {
+      if (this.state.cart.length !== 0) {
+        return (
+          <Stripe
+            receiveTokenFromStripe={this.receiveTokenFromStripe}
+            amount={this.state.totalPrice}
+            name={this.state.userInfo.fName + ' ' + this.state.userInfo.lName}
+            currency="CAD"
+            email={this.state.userInfo.email}
+            shippingAddress={this.state.userInfo.address + ' ' + this.state.userInfo.city}
+            billingAddress={this.state.userInfo.address + ' ' + this.state.userInfo.city}
+            label="Checkout"
+          />
+        );
+      }
+    }
+  };
+
   renderPriceBreakdown = () => {
     return (
       <>
@@ -202,11 +230,7 @@ class OrderConfirmation extends Component {
         <br />
         <Row>
           <Col></Col>
-          <Col>
-            <Button variant="primary" href="#">
-              Pay Now
-            </Button>
-          </Col>
+          <Col>{this.renderCheckoutButton()}</Col>
           <Col></Col>
         </Row>
       </>
