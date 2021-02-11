@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
-import { ListGroup } from 'react-bootstrap';
+import { OverlayTrigger, ListGroup, Tooltip } from 'react-bootstrap';
 
 class FoodCategories extends Component {
-  state = { categories: [], clickedCategory: '' };
+  state = { categories: [], clickedCategory: '', hoverCategory: '', description: '' }; // items array might not be needed
 
   fetchMenuCategories = async () => {
     const response = await fetch('api/menu/categories');
     const categories = await response.json();
     this.setState({ categories: categories });
+  };
+
+  fetchMenuDescription = async () => {
+    const response = await fetch(`api/menu/${this.state.hoverCategory}/description`);
+    const description = await response.json();
+    this.setState({ description: description });
+  };
+
+  handleHover = async (e, category) => {
+    e.preventDefault();
+    await this.setState({ hoverCategory: category });
+    await this.fetchMenuDescription();
   };
 
   handleClick = async (e, category) => {
@@ -21,9 +33,30 @@ class FoodCategories extends Component {
       <>
         <ListGroup as="ul">
           {this.state.categories.map((category) => (
-            <ListGroup.Item as="li" key={category} onClick={(e) => this.handleClick(e, category)}>
-              {category}
-            </ListGroup.Item>
+            <div
+              onMouseOver={(e) => {
+                this.handleHover(e, category);
+              }}
+            >
+              <OverlayTrigger
+                placement="right"
+                delay={{ show: 150, hide: 100 }}
+                overlay={
+                  <Tooltip id={`tooltip-${category}`}>
+                    <strong>{this.state.description.toString()}</strong>
+                  </Tooltip>
+                }
+              >
+                <ListGroup.Item
+                  as="li"
+                  key={category}
+                  onClick={(e) => this.handleClick(e, category)}
+                  on
+                >
+                  {category}
+                </ListGroup.Item>
+              </OverlayTrigger>
+            </div>
           ))}
         </ListGroup>
         <br />

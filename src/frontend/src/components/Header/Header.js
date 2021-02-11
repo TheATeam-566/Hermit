@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Col, Row, Image, Form } from 'react-bootstrap';
+import { Button, Container, Col, Row, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Basket } from 'react-bootstrap-icons';
 import CartModal from './CartModal';
@@ -105,14 +105,6 @@ class Header extends React.Component {
     }
   };
 
-  renderSearchForm = () => {
-    return (
-      <>
-        <Form.Control type="text" placeholder="Find your fave..." readOnly />
-      </>
-    );
-  };
-
   renderCurrentUser = () => {
     return (
       <div className="profile-header-info">
@@ -131,7 +123,6 @@ class Header extends React.Component {
             </Col>
             <Col xs={6} md={4} className="header-search-form">
               {this.renderBasketEmoji()}
-              {this.renderSearchForm()}
             </Col>
           </Row>
         </Container>
