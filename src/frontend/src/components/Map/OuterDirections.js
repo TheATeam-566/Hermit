@@ -11,6 +11,10 @@ class OuterDirections extends Component {
     this.props.getDistance(newDistance);
   };
 
+  setDeliveryInfo = (newDelivery) => {
+    this.props.getDelivery(newDelivery);
+  };
+
   render() {
     return (
       <>
@@ -19,6 +23,7 @@ class OuterDirections extends Component {
           origin="3401+Dufferin+Street+North+York"
           address={this.state.address}
           getDistance={this.setDistance.bind(this)}
+          getDelivery={this.setDeliveryInfo.bind(this)}
         />
       </>
     );

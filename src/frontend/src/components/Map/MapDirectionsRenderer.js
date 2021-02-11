@@ -43,6 +43,10 @@ class MapDirectionsRenderer extends Component {
     this.props.getDistance(newDistance);
   };
 
+  setDeliveryInfo = (newDelivery) => {
+    this.props.getDelivery(newDelivery);
+  };
+
   render() {
     return (
       this.state.directions && (
@@ -52,6 +56,7 @@ class MapDirectionsRenderer extends Component {
             origin={this.state.origin}
             travelMode={this.state.travelMode}
             getDistance={this.setDistance.bind(this)}
+            getDelivery={this.setDeliveryInfo.bind(this)}
           ></DistanceMap>
           <DirectionsRenderer directions={this.state.directions} />
         </div>

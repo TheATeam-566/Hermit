@@ -19,8 +19,17 @@ class OrderConfirmation extends Component {
     deliveryFee: 2.99,
     HST: 0.13,
     taxPrice: 0,
-    totalPrice: 0,
+    totalPrice: 0.0,
     token: {},
+    totalToPersist: {
+      // sending back to main which sends to firestore after an order is completed
+      // this can be refactored later to replace total (same thing can also be done in main)
+      subtotal: 0.0,
+      HST: 0.0,
+      serviceFee: 0.0,
+      deliveryFee: 0.0,
+      grandTotal: 0.0,
+    },
   };
 
   renderCartReview = () => {
@@ -129,6 +138,10 @@ class OrderConfirmation extends Component {
     );
   };
 
+  setDeliveryInfo = (newDelivery) => {
+    this.props.getDelivery(newDelivery);
+  };
+
   setDistanceKm = async () => {
     await this.setState(
       {
@@ -159,13 +172,28 @@ class OrderConfirmation extends Component {
       taxPrice:
         (this.state.deliveryFee + this.state.subTotal + this.state.serviceFee) * this.state.HST,
     });
+
     this.calculateTotal();
+    this.setTotaltoPersist();
+    this.props.receiveOCTotal(this.state.totalToPersist);
   };
 
   calculateTotal = async () => {
-    this.setState({
+    await this.setState({
       totalPrice:
         this.state.subTotal + this.state.serviceFee + this.state.deliveryFee + this.state.taxPrice,
+    });
+  };
+
+  setTotaltoPersist = async () => {
+    await this.setState({
+      totalToPersist: {
+        subtotal: this.state.subTotal,
+        HST: Number(this.state.taxPrice.toFixed(2)),
+        serviceFee: this.state.serviceFee,
+        deliveryFee: Number(this.state.deliveryFee.toFixed(2)),
+        grandTotal: Number(this.state.totalPrice.toFixed(2)),
+      },
     });
   };
 
@@ -241,7 +269,11 @@ class OrderConfirmation extends Component {
     return (
       this.setDistanceKm && (
         <Row>
-          <MapContainer address={this.state.address} getDistance={this.setDistance.bind(this)} />
+          <MapContainer
+            address={this.state.address}
+            getDistance={this.setDistance.bind(this)}
+            getDelivery={this.setDeliveryInfo.bind(this)}
+          />
         </Row>
       )
     );

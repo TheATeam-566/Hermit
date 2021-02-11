@@ -15,9 +15,10 @@ const Map = compose(
   withHandlers(
     (props) => (
       // eslint-disable-next-line no-sequences
-      { distance: null },
+      { distance: null, deliveryInfo: null },
       {
         setDistance: () => (newDistance) => ({ distance: props.getDistance(newDistance) }),
+        setDeliveryInfo: () => (newDelivery) => ({ deliveryInfo: props.getDelivery(newDelivery) }),
       }
     )
   ),
@@ -25,7 +26,11 @@ const Map = compose(
   withGoogleMap
 )((props) => (
   <GoogleMap defaultCenter={{ lat: 43.653225, lng: -79.383186 }} defaultZoom={10}>
-    <OuterDirections address={props.address} getDistance={props.setDistance.bind(this)} />
+    <OuterDirections
+      address={props.address}
+      getDistance={props.setDistance.bind(this)}
+      getDelivery={props.setDeliveryInfo.bind(this)}
+    />
   </GoogleMap>
 ));
 
@@ -36,8 +41,18 @@ class MapContainer extends Component {
     this.props.getDistance(newDistance);
   };
 
+  setDeliveryInfo = (newDelivery) => {
+    this.props.getDelivery(newDelivery);
+  };
+
   MapContainerfunc = () => {
-    return <Map address={this.state.address} getDistance={this.setDistance.bind(this)} />;
+    return (
+      <Map
+        address={this.state.address}
+        getDistance={this.setDistance.bind(this)}
+        getDelivery={this.setDeliveryInfo.bind(this)}
+      />
+    );
   };
 
   render() {
