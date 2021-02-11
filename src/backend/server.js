@@ -5,10 +5,10 @@ const cors = require('cors');
 
 const keys = require('./config/keys');
 const passport = require('./services/passport');
-const menuRouter = require('./routes/menuRoutes');
-const oauthRouter = require('./routes/authRoutes');
-const userRouter = require('./routes/userRoutes');
-const stripeRouter = require('./routes/stripeRoutes');
+const menuRouter = require('./routes/menu');
+const oauthRouter = require('./routes/auth');
+const userRouter = require('./routes/user');
+const stripeRouter = require('./routes/stripe');
 
 const app = express();
 const PORT = 8000;

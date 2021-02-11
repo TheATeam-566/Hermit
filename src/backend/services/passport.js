@@ -1,5 +1,5 @@
 const passport = require('passport');
-
+const hasha = require('hasha');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User');
 const oauthKeys = require('../config/keys');
@@ -24,7 +24,7 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       const data = {
-        id: profile.id,
+        id: hasha(profile._json.email, { algorithm: 'md5' }),
         fName: profile.name.givenName,
         lName: profile.name.familyName,
         email: profile._json.email,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Alert, Form, Container, Row, Col } from 'react-bootstrap';
+import { Route, Switch, Link } from 'react-router-dom';
 
 class Userpage extends Component {
   state = {
@@ -208,6 +209,15 @@ class Userpage extends Component {
   renderForm = () => {
     return (
       <Container>
+        <Row>
+          <Col>
+            <Link to="/orders">
+              <Button>Order History</Button>
+              <br />
+              <br />
+            </Link>
+          </Col>
+        </Row>
         <Form>
           <Row>
             <Col>

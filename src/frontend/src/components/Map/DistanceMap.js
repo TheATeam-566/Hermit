@@ -10,6 +10,12 @@ class DistanceMap extends Component {
       address: this.props.address,
       origin: this.props.origin,
       travelMode: this.props.travelMode,
+      persistDelivery: {
+        driveTime: 0,
+        KM: 0,
+        destinationAddress: this.props.address,
+        deliveryAddress: this.props.origin,
+      },
     };
     this.onScriptLoad = this.onScriptLoad.bind(this);
   }
@@ -29,9 +35,16 @@ class DistanceMap extends Component {
           this.setState({
             distance: response.rows[0].elements[0].distance.value,
             address: response.destinationAddresses[0],
+            persistDelivery: {
+              driveTime: response.rows[0].elements[0].duration.value,
+              KM: response.rows[0].elements[0].distance.value,
+              destinationAddress: this.props.address,
+              deliveryAddress: this.props.origin,
+            },
           });
           //need this to call parent function to set distance in parent
           this.props.getDistance(this.state.distance);
+          this.props.getDelivery(this.state.persistDelivery);
         }
       }
     );

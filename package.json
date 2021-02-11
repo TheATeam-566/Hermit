@@ -21,6 +21,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "firebase-admin": "^9.4.2",
+    "hasha": "^5.2.2",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "serve": "^11.3.2",
