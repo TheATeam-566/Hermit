@@ -1,30 +1,34 @@
 import React, { Component } from 'react';
-import { Button, Card, CardDeck, CardColumns } from 'react-bootstrap';
+import { Button, Card, CardDeck, Container, CardColumns } from 'react-bootstrap';
 import _ from 'lodash';
 
-class FoodCard extends Component {
-  state = { items: [], category: '', cart: [] };
-
-  componentWillReceiveProps = async (nextProps) => {
-    await this.setState({ cart: nextProps.updatedCart });
-    await this.setState({ category: nextProps.category });
-    await this.fetchMenuItems();
-  };
+class SearchResults extends Component {
+  state = { categories: [], items: [], cart: [] };
 
   fetchMenuItems = async () => {
-    const response = await fetch(`api/menu/${this.state.category}/items`);
+    const response = await fetch('api/menu/categories/allitems');
     const items = await response.json();
     this.setState({ items: items });
   };
+
+  componentWillReceiveProps = async (nextProps) => {
+    await this.setState({ cart: nextProps.updatedCart });
+    this.fetchMenuItems();
+  };
+
+  async componentDidMount() {
+    await this.fetchMenuItems();
+    this.props.receiveItemsFromSearchResults(this.state.items);
+  }
 
   clickHandler = async (e, item) => {
     e.preventDefault();
 
     const objectToPush = {
       caption: item.caption,
-      description: item.description,
       image: item.image,
       price: item.price,
+      description: item.description,
       quantity: 0, // This has to stay at 0 due to post increment below
     };
 
@@ -54,44 +58,37 @@ class FoodCard extends Component {
           </Button>
         </>
       );
-    } else if (!item.price) {
-      return (
-        <>
-          <Card.Text>No Price</Card.Text>
-          <Button variant="secondary" disabled>
-            Add to Cart
-          </Button>
-        </>
-      );
     }
   };
 
-  renderCategories = () => {
+  renderItems = () => {
     return (
       <>
-        <CardDeck>
-          <CardColumns>
-            {Object.values(this.state.items).map((item) => (
-              <>
-                <Card style={{ width: '18rem' }}>
-                  <Card.Img variant="top" src={item.image} />
-                  <Card.Body>
-                    <Card.Title>{item.caption}</Card.Title>
-                    <Card.Text>{item.description}</Card.Text>
-                    {this.renderButtons(item)}
-                  </Card.Body>
-                </Card>
-              </>
-            ))}
-          </CardColumns>
-        </CardDeck>
+        <Container>
+          <CardDeck>
+            <CardColumns>
+              {Object.values(this.props.filteredItems).map((item) => (
+                <>
+                  <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={item.image} />
+                    <Card.Body>
+                      <Card.Title>{item.caption}</Card.Title>
+                      <Card.Text>{item.description}</Card.Text>
+                      {this.renderButtons(item)}
+                    </Card.Body>
+                  </Card>
+                </>
+              ))}
+            </CardColumns>
+          </CardDeck>
+        </Container>
       </>
     );
   };
 
   render() {
-    return <>{this.renderCategories()}</>;
+    return <>{this.renderItems()}</>;
   }
 }
 
-export default FoodCard;
+export default SearchResults;

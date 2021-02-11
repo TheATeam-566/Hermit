@@ -43,9 +43,9 @@ class OrderConfirmation extends Component {
                   <Col xs={6}>
                     <br />
                     <br />
-                    {String(food.caption)}
+                    <h5>{String(food.caption)}</h5>
                     <br />
-                    {'A delicious item 🦆'}
+                    {food.description}
                     <br />${String(food.price)}
                     <br />
                   </Col>

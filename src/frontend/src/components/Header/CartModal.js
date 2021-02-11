@@ -78,9 +78,9 @@ class CartModal extends React.Component {
                     <Col xs={6}>
                       <br />
                       <br />
-                      {String(food.caption)}
+                      <strong>{String(food.caption)}</strong>
                       <br />
-                      {'A delicious item 🦆'}
+                      {String(food.description)}
                       <br />${String(food.price)}
                       <br />
                     </Col>
