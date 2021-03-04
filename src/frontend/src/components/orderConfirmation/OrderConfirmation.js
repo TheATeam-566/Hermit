@@ -295,6 +295,7 @@ class OrderConfirmation extends Component {
         <hr></hr>
         <br />
         {this.renderBottomView()}
+        <br />
       </Container>
     );
   }
