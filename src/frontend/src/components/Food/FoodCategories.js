@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { OverlayTrigger, ListGroup, Tooltip } from 'react-bootstrap';
+import './FoodCategories.css';
 
 class FoodCategories extends Component {
   state = { categories: [], clickedCategory: '', hoverCategory: '', description: '' }; // items array might not be needed
@@ -48,6 +49,7 @@ class FoodCategories extends Component {
                 }
               >
                 <ListGroup.Item
+                  className="list-group-item-new"
                   as="li"
                   key={category}
                   onClick={(e) => this.handleClick(e, category)}
