@@ -1,6 +1,5 @@
 /* global google */
 import React, { Component } from 'react';
-import { Table } from 'react-bootstrap';
 
 class DistanceMap extends Component {
   constructor(props) {
@@ -45,6 +44,7 @@ class DistanceMap extends Component {
           //need this to call parent function to set distance in parent
           this.props.getDistance(this.state.distance);
           this.props.getDelivery(this.state.persistDelivery);
+          this.props.getDeliveryAddress(this.state.address);
         }
       }
     );
@@ -67,30 +67,7 @@ class DistanceMap extends Component {
   }
 
   render() {
-    return (
-      <>
-        <Table className="distance-table" striped borderless hover size="sm" variant="light">
-          <tbody>
-            <tr>
-              <td className="distance-font">
-                <b style={{ fontWeight: 500 }}>Delivery Address:</b>
-              </td>
-              <td className="distance-font">{this.state.address}</td>
-            </tr>
-          </tbody>
-        </Table>
-        <Table className="distance-table" striped borderless hover size="sm" variant="light">
-          <tbody>
-            <tr>
-              <td className="distance-font">
-                You are located{' '}
-                <b style={{ fontWeight: 500 }}>{(this.state.distance / 1000).toFixed(2)}</b> km away
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-      </>
-    );
+    return <></>;
   }
 }
 

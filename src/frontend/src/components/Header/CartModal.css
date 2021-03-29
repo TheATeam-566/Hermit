@@ -1,0 +1,14 @@
+.cart-items {
+  background: #32325d !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border: none !important;
+}
+
+.cart-items-price {
+  font-weight: bold !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.modal-checkout-button {
+  justify-content: right !important;
+}

@@ -7,6 +7,10 @@ class OuterDirections extends Component {
     distance: null,
   };
 
+  setDeliveryAddress = (newDeliveryAdd) => {
+    this.props.getDeliveryAddress(newDeliveryAdd);
+  };
+
   setDistance = (newDistance) => {
     this.props.getDistance(newDistance);
   };
@@ -22,6 +26,7 @@ class OuterDirections extends Component {
           travelMode="DRIVING"
           origin="3401+Dufferin+Street+North+York"
           address={this.state.address}
+          getDeliveryAddress={this.setDeliveryAddress.bind(this)}
           getDistance={this.setDistance.bind(this)}
           getDelivery={this.setDeliveryInfo.bind(this)}
         />

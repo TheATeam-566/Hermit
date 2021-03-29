@@ -1,3 +1,12 @@
+.category-text {
+  opacity: 1;
+  font-size: 19px;
+  text-align: center;
+  color: #e9ecef;
+}
+
 .list-group-item-new {
-  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  background: rgba(50, 50, 93, 0.4) !important;
+  border: none !important;
+  cursor: pointer;
 }

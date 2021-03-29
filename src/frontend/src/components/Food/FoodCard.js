@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, CardDeck, CardColumns, Accordion, CardGroup } from 'react-bootstrap';
+import { Button, Card, CardDeck, CardColumns, Accordion } from 'react-bootstrap';
 import _ from 'lodash';
 import './FoodCard.css';
 
@@ -49,9 +49,9 @@ class FoodCard extends Component {
     if (item.price) {
       return (
         <>
-          <Card.Text className="productPrice">${item.price}</Card.Text>
+          <Card.Text className="h4">${item.price}</Card.Text>
           <Button
-            className="productButton"
+            className="btn-round animation-on-hover"
             variant="primary"
             onClick={(e) => this.clickHandler(e, item)}
           >
@@ -78,13 +78,15 @@ class FoodCard extends Component {
           <CardColumns>
             {Object.values(this.state.items).map((item) => (
               <>
-                <Card className="card-style" style={{ width: '20rem' }}>
+                <Card className="text-center" style={{ width: '20rem' }}>
                   <Card.Img variant="top" src={item.image} />
                   <Card.Body>
                     <Card.Title className="productTitle">{item.caption}</Card.Title>
                     <Accordion className="accordion-style" defaultActiveKey="1">
                       <Accordion.Toggle as={Card.Header} eventKey="0">
-                        Details
+                        <Button className="btn-round animation-on-hover" variant="default">
+                          Details
+                        </Button>
                       </Accordion.Toggle>
                       <Accordion.Collapse eventKey="0">
                         <Card.Text className="accordion-style-text">{item.description}</Card.Text>

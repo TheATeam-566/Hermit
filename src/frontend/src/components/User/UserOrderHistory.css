@@ -1,0 +1,13 @@
+.order-history-items {
+  min-height: 63.3vh;
+}
+
+.order-history-container {
+  min-height: 100%;
+}
+
+.list-group-item-new {
+  background: rgba(50, 50, 93, 0.3) !important;
+  border: none !important;
+  cursor: default;
+}

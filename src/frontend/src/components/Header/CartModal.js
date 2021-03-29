@@ -1,7 +1,8 @@
 import React from 'react';
-import { Modal, Button, ListGroup, Image, Container, Col, Row } from 'react-bootstrap';
+import { Modal, Button, ListGroup, Image, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { PlusCircleFill, DashCircleFill } from 'react-bootstrap-icons';
+import './CartModal.css';
 
 class CartModal extends React.Component {
   state = { cart: [] };
@@ -54,50 +55,55 @@ class CartModal extends React.Component {
   renderModalBody = () => {
     if (this.state.cart.length === 0) {
       return (
-        <Modal.Body>
+        <Modal.Body className="modal-black">
           <p style={{ textAlign: 'center' }}>🦀 Your cart is empty 🦀</p>
         </Modal.Body>
       );
     } else if (this.state.cart.length !== 0) {
       return (
-        <Modal.Body>
+        <Modal.Body className="modal-black">
           {this.state.cart.map((food) => (
             <ListGroup>
-              <ListGroup.Item key={food}>
-                <Container fluid>
-                  <Row>
-                    <Col>
-                      <Image
-                        src={`${food.image}`}
-                        alt={`${food.caption}`}
-                        width="150"
-                        height="150"
-                        rounded
-                      />
-                    </Col>
-                    <Col xs={6}>
-                      <br />
-                      <br />
-                      <strong>{String(food.caption)}</strong>
-                      <br />
-                      {String(food.description)}
-                      <br />${String(food.price)}
-                      <br />
-                    </Col>
-                    <Col>
-                      <br />
-                      <br />
-                      <Button variant="danger" onClick={(e) => this.onDecreaseQuantity(e, food)}>
-                        <DashCircleFill />
-                      </Button>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <Button variant="success" onClick={(e) => this.onIncreaseQuantity(e, food)}>
-                        <PlusCircleFill />
-                      </Button>
-                      <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{food.quantity}</h2>
-                    </Col>
-                  </Row>
-                </Container>
+              <ListGroup.Item key={food} className="cart-items">
+                <Row>
+                  <Col xs="3">
+                    <br />
+                    <Image
+                      src={`${food.image}`}
+                      alt={`${food.caption}`}
+                      width="150"
+                      height="150"
+                      rounded
+                    />
+                  </Col>
+                  <Col xs="6">
+                    <br />
+                    <h2>{String(food.caption)}</h2>
+                    <p className=" h4">{String(food.description)}</p>
+                    <span className="h4 cart-items-price">${String(food.price)}</span>
+                    <br />
+                  </Col>
+                  <Col>
+                    <br />
+                    <br />
+                    <Button
+                      variant="danger"
+                      className="btn-round animation-on-hover"
+                      onClick={(e) => this.onDecreaseQuantity(e, food)}
+                    >
+                      <DashCircleFill />
+                    </Button>
+
+                    <Button
+                      variant="success"
+                      className="btn-round animation-on-hover"
+                      onClick={(e) => this.onIncreaseQuantity(e, food)}
+                    >
+                      <PlusCircleFill />
+                    </Button>
+                    <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{food.quantity}</h2>
+                  </Col>
+                </Row>
               </ListGroup.Item>
               <hr />
             </ListGroup>
@@ -112,7 +118,7 @@ class CartModal extends React.Component {
       return (
         <>
           <Link to="/order">
-            <Button to="#" onClick={this.onClose}>
+            <Button className="btn-round animation-on-hover" to="#" onClick={this.onClose}>
               Proceed to Checkout
             </Button>
           </Link>
@@ -129,17 +135,19 @@ class CartModal extends React.Component {
     return (
       <>
         <Modal
+          className="modal-black"
           {...this.props}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
-          centered
           onHide={this.onClose}
         >
           <Modal.Header closeButton={this.onClose}>
-            <Modal.Title id="contained-modal-title-vcenter">Your Cart</Modal.Title>
+            <Modal.Title id="contained-modal-title-vcenter" className="modal-title">
+              Your Cart
+            </Modal.Title>
           </Modal.Header>
           {this.renderModalBody()}
-          <Modal.Footer>{this.renderButtons()}</Modal.Footer>
+          <Modal.Footer className="justify-content-end">{this.renderButtons()}</Modal.Footer>
         </Modal>
       </>
     );

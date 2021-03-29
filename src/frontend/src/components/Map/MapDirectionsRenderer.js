@@ -39,6 +39,10 @@ class MapDirectionsRenderer extends Component {
     );
   }
 
+  setDeliveryAddress = (newDeliveryAdd) => {
+    this.props.getDeliveryAddress(newDeliveryAdd);
+  };
+
   setDistance = (newDistance) => {
     this.props.getDistance(newDistance);
   };
@@ -55,6 +59,7 @@ class MapDirectionsRenderer extends Component {
             address={this.state.address}
             origin={this.state.origin}
             travelMode={this.state.travelMode}
+            getDeliveryAddress={this.setDeliveryAddress.bind(this)}
             getDistance={this.setDistance.bind(this)}
             getDelivery={this.setDeliveryInfo.bind(this)}
           ></DistanceMap>

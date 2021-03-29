@@ -31,8 +31,8 @@ class FoodCategories extends Component {
 
   renderCategories = () => {
     return (
-      <>
-        <ListGroup as="ul">
+      <div>
+        <ListGroup className="list-group-ul">
           {this.state.categories.map((category) => (
             <div
               onMouseOver={(e) => {
@@ -43,27 +43,25 @@ class FoodCategories extends Component {
                 placement="right"
                 delay={{ show: 150, hide: 100 }}
                 overlay={
-                  <Tooltip id={`tooltip-${category}`}>
-                    <strong>{this.state.description.toString()}</strong>
+                  <Tooltip id={`tooltip-${category}`} className="tooltip-hover">
+                    <strong className="tooltip-text">{this.state.description.toString()}</strong>
                   </Tooltip>
                 }
               >
                 <ListGroup.Item
-                  className="list-group-item-new"
+                  className="list-group-item-new "
                   as="li"
                   key={category}
                   onClick={(e) => this.handleClick(e, category)}
                   on
                 >
-                  {category}
+                  <div className="category-text">{category}</div>
                 </ListGroup.Item>
               </OverlayTrigger>
             </div>
           ))}
         </ListGroup>
-        <br />
-        <br />
-      </>
+      </div>
     );
   };
 

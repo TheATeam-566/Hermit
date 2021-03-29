@@ -1,35 +1,10 @@
-.card-style {
-  position: relative;
-}
-
-.productTitle {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: center;
-}
-
-.productPrice {
-  font-weight: bold;
-  font-size: large;
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.productButton {
-  left: 30%;
-  position: relative;
-}
-
-.accordion-style {
-  cursor: pointer;
-  text-align: center;
-  border: none;
-  border-color: transparent;
-  background-color: transparent;
-}
-
 .accordion-style-text {
   cursor: default;
   text-align: left;
+}
+.productTitle {
+  font-size: 20px !important;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }

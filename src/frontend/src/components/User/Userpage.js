@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Alert, Form, Container, Row, Col } from 'react-bootstrap';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Userpage extends Component {
   state = {
@@ -109,7 +109,8 @@ class Userpage extends Component {
     return (
       <>
         <Button
-          variant="btn btn-outline-success"
+          variant="success"
+          className="btn-round animation-on-hover"
           onClick={(e) => this.onSubmit(e, this.state.userInfo)}
         >
           Update Profile
@@ -124,7 +125,8 @@ class Userpage extends Component {
     return (
       <>
         <Button
-          variant="btn btn-outline-danger"
+          variant="danger"
+          className="btn-round animation-on-hover"
           onClick={(e) => {
             this.AlertDismissibleRemoveWrapper(e);
           }}
@@ -156,7 +158,11 @@ class Userpage extends Component {
         <p>The page will now reload.</p>
         <hr />
         <div className="d-flex justify-content-end">
-          <Button onClick={(e) => this.closeSubmitAlert(e)} variant="outline-success">
+          <Button
+            onClick={(e) => this.closeSubmitAlert(e)}
+            variant="outline-success"
+            className="btn-round animation-on-hover"
+          >
             Got it, thanks.
           </Button>
         </div>
@@ -178,6 +184,7 @@ class Userpage extends Component {
             <Button
               onClick={(e) => this.closeRemoveAlert(e, this.state.userInfo)}
               variant="outline-danger"
+              className="btn-round animation-on-hover"
             >
               Yes, thanks.
             </Button>
@@ -212,7 +219,9 @@ class Userpage extends Component {
         <Row>
           <Col>
             <Link to="/orders">
-              <Button>Order History</Button>
+              <Button className="btn-round animation-on-hover" variant="info">
+                Order History
+              </Button>
               <br />
               <br />
             </Link>

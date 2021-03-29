@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Card, CardDeck, Container, CardColumns } from 'react-bootstrap';
+import { Button, Card, CardDeck, Container, CardColumns, Accordion } from 'react-bootstrap';
 import _ from 'lodash';
+import './SearchResults.css';
 
 class SearchResults extends Component {
   state = { categories: [], items: [], cart: [] };
@@ -52,8 +53,21 @@ class SearchResults extends Component {
     if (item.price) {
       return (
         <>
-          <Card.Text>${item.price}</Card.Text>
-          <Button variant="primary" onClick={(e) => this.clickHandler(e, item)}>
+          <Card.Text className="h4">${item.price}</Card.Text>
+          <Button
+            className="btn-round animation-on-hover"
+            variant="primary"
+            onClick={(e) => this.clickHandler(e, item)}
+          >
+            Add to Cart
+          </Button>
+        </>
+      );
+    } else if (!item.price) {
+      return (
+        <>
+          <Card.Text>No Price</Card.Text>
+          <Button variant="secondary" disabled>
             Add to Cart
           </Button>
         </>
@@ -69,11 +83,20 @@ class SearchResults extends Component {
             <CardColumns>
               {Object.values(this.props.filteredItems).map((item) => (
                 <>
-                  <Card style={{ width: '18rem' }}>
+                  <Card className="text-center" style={{ width: '20rem' }}>
                     <Card.Img variant="top" src={item.image} />
                     <Card.Body>
-                      <Card.Title>{item.caption}</Card.Title>
-                      <Card.Text>{item.description}</Card.Text>
+                      <Card.Title className="productTitle">{item.caption}</Card.Title>
+                      <Accordion className="accordion-style" defaultActiveKey="1">
+                        <Accordion.Toggle as={Card.Header} eventKey="0">
+                          <Button className="btn-round animation-on-hover" variant="default">
+                            Details
+                          </Button>
+                        </Accordion.Toggle>
+                        <Accordion.Collapse eventKey="0">
+                          <Card.Text className="accordion-style-text">{item.description}</Card.Text>
+                        </Accordion.Collapse>
+                      </Accordion>
                       {this.renderButtons(item)}
                     </Card.Body>
                   </Card>

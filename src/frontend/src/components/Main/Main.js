@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 import Header from '../Header/Header';
 import Food from '../Food/Food';
 import Footer from '../Footer/Footer';
@@ -165,40 +166,49 @@ class MainPage extends Component {
           cart={this.state.cart}
           receiveCartFromModal={this.receiveCartFromModal}
         />
-        <Switch>
-          <Route exact path="/user">
-            <Userpage
-              userInfo={this.state.userInfo}
-              isLoggedIn={this.state.isLoggedIn}
-              cart={this.state.cart}
-              receiveUserInfoFromUserPage={this.receiveUserInfoFromUserPage}
-            />
-          </Route>
-          <Route
-            exact
-            path="/order"
-            render={() => (
-              <OrderConfirmation
-                userInfo={this.state.userInfo}
-                isLoggedIn={this.state.isLoggedIn}
-                cart={this.state.cart}
-                address={this.state.userInfo.address}
-                subTotal={this.state.total}
-                updateCartQuantities={this.updateCartQuantities}
-                sendPayment={this.sendPayment}
-                token={this.state.token}
-                receiveTokenFromOrderConfirmation={this.receiveTokenFromOrderConfirmation}
-                receiveOCTotal={this.receiveOCTotal}
-                getDelivery={this.setDeliveryInfo.bind(this)}
+        <Container fluid>
+          <div className="index-page">
+            <div className="squares square1"></div>
+            <div className="squares square3"></div>
+            <div className="squares square4"></div>
+            <div className="squares square5"></div>
+            <div className="squares square6"></div>
+            <Switch>
+              <Route exact path="/user">
+                <Userpage
+                  userInfo={this.state.userInfo}
+                  isLoggedIn={this.state.isLoggedIn}
+                  cart={this.state.cart}
+                  receiveUserInfoFromUserPage={this.receiveUserInfoFromUserPage}
+                />
+              </Route>
+              <Route
+                exact
+                path="/order"
+                render={() => (
+                  <OrderConfirmation
+                    userInfo={this.state.userInfo}
+                    isLoggedIn={this.state.isLoggedIn}
+                    cart={this.state.cart}
+                    address={this.state.userInfo.address}
+                    subTotal={this.state.total}
+                    updateCartQuantities={this.updateCartQuantities}
+                    sendPayment={this.sendPayment}
+                    token={this.state.token}
+                    receiveTokenFromOrderConfirmation={this.receiveTokenFromOrderConfirmation}
+                    receiveOCTotal={this.receiveOCTotal}
+                    getDelivery={this.setDeliveryInfo.bind(this)}
+                  />
+                )}
               />
-            )}
-          />
-          <Route exact path="/orders">
-            <UserOrderHistory userInfo={this.state.userInfo} />
-          </Route>
-          <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
-        </Switch>
-        <Footer />
+              <Route exact path="/orders">
+                <UserOrderHistory userInfo={this.state.userInfo} />
+              </Route>
+              <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
+            </Switch>
+          </div>
+          <Footer />
+        </Container>
       </>
     );
   }

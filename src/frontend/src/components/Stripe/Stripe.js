@@ -18,7 +18,9 @@ class Stripe extends Component {
         billingAddress={this.props.billingAddress.address + ' ' + this.props.billingAddress.city}
         label={this.props.label}
       >
-        <Button>Pay Now</Button>
+        <Button variant="success" className="btn-round animation-on-hover">
+          Pay Now
+        </Button>
       </StripeCheckout>
     );
   }
