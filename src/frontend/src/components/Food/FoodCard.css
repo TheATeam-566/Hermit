@@ -1,0 +1,10 @@
+.accordion-style-text {
+  cursor: default;
+  text-align: left;
+}
+.productTitle {
+  font-size: 20px !important;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}

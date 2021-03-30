@@ -28,7 +28,7 @@ class SearchBar extends Component {
                   }
                 }}
               >
-                <XCircleFill />
+                <XCircleFill style={{ marginLeft: '12px' }} />
               </InputGroup.Text>
             </InputGroup.Append>
           </InputGroup>
@@ -40,7 +40,7 @@ class SearchBar extends Component {
   render() {
     return (
       <Row>
-        <Col xs={1} md={3} className="search-form">
+        <Col xs={1} md={{ span: 3 }} className="search-form">
           {this.renderSearchForm()}
         </Col>
       </Row>

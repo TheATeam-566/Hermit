@@ -44,18 +44,26 @@ class Header extends React.Component {
     if (!this.state.isLoggedIn) {
       return (
         <>
-          <br />
-          <Button variant="primary" href="/auth/google/">
-            Sign In
-          </Button>
+          <Col className="user-action-button">
+            <br />
+            <Button variant="primary" href="/auth/google/" className="btn-round animation-on-hover">
+              Sign In
+            </Button>
+          </Col>
         </>
       );
     } else {
       return (
         <>
-          <Button variant="outline-danger" href="/auth/logout/">
-            Sign Out
-          </Button>
+          <Col className="user-action-button">
+            <Button
+              variant="outline-danger"
+              href="/auth/logout/"
+              className="btn-round animation-on-hover"
+            >
+              Sign Out
+            </Button>
+          </Col>
         </>
       );
     }
@@ -64,14 +72,16 @@ class Header extends React.Component {
   renderAvatar = () => {
     return (
       <>
-        <Link to="/user">
-          <Image
-            className="profile-header-img"
-            src={`${this.state.userInfo.image}`}
-            alt="User Avatar"
-            roundedCircle
-          />
-        </Link>
+        <Col>
+          <Link to="/user">
+            <Image
+              className="profile-header-img"
+              src={`${this.state.userInfo.image}`}
+              alt="User Avatar"
+              roundedCircle
+            />
+          </Link>
+        </Col>
       </>
     );
   };
@@ -81,7 +91,11 @@ class Header extends React.Component {
     if (this.state.userInfo.fName || this.state.userInfo.lName) {
       return (
         <>
-          <h3>{this.state.userInfo.fName + ' ' + this.state.userInfo.lName}</h3>
+          <Col>
+            <h3 className="user-name-text">
+              {this.state.userInfo.fName + ' ' + this.state.userInfo.lName}
+            </h3>
+          </Col>
         </>
       );
     }
@@ -91,15 +105,19 @@ class Header extends React.Component {
     if (this.state.userInfo.address) {
       return (
         <>
-          <h6>{this.state.userInfo.address}</h6>
+          <Col>
+            <h6 className="user-address-text">{this.state.userInfo.address}</h6>
+          </Col>
         </>
       );
     } else if (!this.state.userInfo.address && this.state.isLoggedIn) {
       return (
         <>
-          <h6>
-            <Link to="/user">No address.</Link>
-          </h6>
+          <Col>
+            <h6>
+              <Link to="/user">No address.</Link>
+            </h6>
+          </Col>
         </>
       );
     }
@@ -107,27 +125,40 @@ class Header extends React.Component {
 
   renderCurrentUser = () => {
     return (
-      <div className="profile-header-info">
-        <Container>
-          <Row>
-            <Col xs={6} md={4}>
-              {this.renderAvatar()}
-              {this.renderName()}
-              {this.renderAddress()}
-              {this.renderButtons()}
-            </Col>
-            <Col xs={6} md={4}>
+      <>
+        <Container fluid>
+          <Row md={24}>
+            <Col md={{ span: 4, offset: 1 }}>
+              <br />
               <Link to="/">
-                <Image src={'/hermit_white.png'} height="150" width="150" rounded />
+                <Image src={'/hermit_white-inverted.png'} height="150" width="150" rounded />
               </Link>
             </Col>
-            <Col xs={6} md={4} className="header-search-form">
-              {this.renderBasketEmoji()}
+            <Col md={{ offset: 0 }}>
+              <br />
+              <Image src={'/cheese-factory-logo.png'} height="100%" width="50%" />
+            </Col>
+            <Col>
+              <Row>
+                <Col>
+                  <br />
+                  {this.renderAvatar()}
+                  {this.renderName()}
+                  {this.renderAddress()}
+                </Col>
+                <Col>
+                  <br />
+                  <br />
+                  {this.renderButtons()}
+                  <br />
+                  {this.renderBasketEmoji()}
+                </Col>
+              </Row>
             </Col>
           </Row>
+          <hr className="header-divider" />
         </Container>
-        <hr />
-      </div>
+      </>
     );
   };
 
@@ -137,18 +168,22 @@ class Header extends React.Component {
 
   renderBasketEmoji = () => {
     return (
-      <div className="icon">
+      <Col>
         <div
           onClick={(e) => {
             this.showModal(e);
           }}
         >
-          Total:{' '}
-          <Link to="#">
-            ${this.state.total} <Basket size={30} />
-          </Link>
+          <Col className="cart-button">
+            <h6 className="user-name-text">Total: </h6>
+          </Col>
+          <Col className="cart-button">
+            <Link to="#">
+              <Basket size={40} /> ${this.state.total}
+            </Link>
+          </Col>
         </div>
-      </div>
+      </Col>
     );
   };
 

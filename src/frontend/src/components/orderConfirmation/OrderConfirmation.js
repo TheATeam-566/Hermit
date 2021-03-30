@@ -10,6 +10,7 @@ class OrderConfirmation extends Component {
     userInfo: this.props.userInfo,
     isLoggedIn: this.props.isLoggedIn,
     address: this.props.address,
+    deliveryAddress: '',
     cart: this.props.cart,
     subTotal: this.props.subTotal,
     distance: 0,
@@ -37,41 +38,46 @@ class OrderConfirmation extends Component {
       <>
         {this.state.cart.map((food) => (
           <ListGroup>
-            <ListGroup.Item key={food}>
-              <Container fluid>
-                <Row>
-                  <Col>
-                    <Image
-                      src={`${food.image}`}
-                      alt={`${food.caption}`}
-                      width="150"
-                      height="150"
-                      rounded
-                    />
-                  </Col>
-                  <Col xs={6}>
-                    <br />
-                    <br />
-                    <h5>{String(food.caption)}</h5>
-                    <br />
-                    {food.description}
-                    <br />${String(food.price)}
-                    <br />
-                  </Col>
-                  <Col>
-                    <br />
-                    <br />
-                    <Button variant="danger" onClick={(e) => this.onDecreaseQuantity(e, food)}>
-                      <DashCircleFill />
-                    </Button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button variant="success" onClick={(e) => this.onIncreaseQuantity(e, food)}>
-                      <PlusCircleFill />
-                    </Button>
-                    <h2>&nbsp;&nbsp;&nbsp;&nbsp;{food.quantity}</h2>
-                  </Col>
-                </Row>
-              </Container>
+            <ListGroup.Item key={food} className="cart-items">
+              <Row>
+                <Col md={{ span: 2, offset: 1 }}>
+                  <br />
+                  <Image
+                    src={`${food.image}`}
+                    alt={`${food.caption}`}
+                    width="150"
+                    height="150"
+                    rounded
+                  />
+                </Col>
+                <Col md={{ span: 6, offset: 0 }}>
+                  <br />
+                  <h2>{String(food.caption)}</h2>
+                  <p className="h4 cart-items-price">{String(food.description)}</p>
+                  <span className="h4 cart-items-price">${String(food.price)}</span>
+                  <br />
+                </Col>
+                <Col md={{ span: 2, offset: 0 }}>
+                  <br />
+                  <br />
+                  <Button
+                    variant="danger"
+                    className="btn-round animation-on-hover"
+                    onClick={(e) => this.onDecreaseQuantity(e, food)}
+                  >
+                    <DashCircleFill />
+                  </Button>
+
+                  <Button
+                    variant="success"
+                    className="btn-round animation-on-hover"
+                    onClick={(e) => this.onIncreaseQuantity(e, food)}
+                  >
+                    <PlusCircleFill />
+                  </Button>
+                  <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{food.quantity}</h2>
+                </Col>
+              </Row>
             </ListGroup.Item>
             <hr />
           </ListGroup>
@@ -122,6 +128,12 @@ class OrderConfirmation extends Component {
         this.calculateTax();
         this.calculateTotal();
       }
+    });
+  };
+
+  setDeliveryAddress = async (newDeliveryAdd) => {
+    await this.setState({
+      deliveryAddress: newDeliveryAdd,
     });
   };
 
@@ -225,7 +237,7 @@ class OrderConfirmation extends Component {
     return (
       <>
         <Row>
-          <Table striped borderless hover variant="light" className="table-fill">
+          <Table responsive className="price-breakdown-table ">
             <tbody className="table-hover">
               <tr>
                 <td className="text-left">Sub Total:</td>
@@ -244,11 +256,11 @@ class OrderConfirmation extends Component {
                 <td className="text-left">${this.state.taxPrice.toFixed(2)}</td>
               </tr>
               <tr>
-                <td className="text-left" style={{ fontWeight: 800 }}>
-                  Total:
+                <td className="text-left">
+                  <strong>Total:</strong>
                 </td>
-                <td className="text-left" style={{ fontWeight: 800 }}>
-                  ${this.state.totalPrice.toFixed(2)}
+                <td className="text-left">
+                  <strong>${this.state.totalPrice.toFixed(2)}</strong>
                 </td>
               </tr>
             </tbody>
@@ -268,13 +280,33 @@ class OrderConfirmation extends Component {
   renderMapView = () => {
     return (
       this.setDistanceKm && (
-        <Row>
-          <MapContainer
-            address={this.state.address}
-            getDistance={this.setDistance.bind(this)}
-            getDelivery={this.setDeliveryInfo.bind(this)}
-          />
-        </Row>
+        <>
+          <Row>
+            <MapContainer
+              address={this.state.address}
+              getDeliveryAddress={this.setDeliveryAddress.bind(this)}
+              getDistance={this.setDistance.bind(this)}
+              getDelivery={this.setDeliveryInfo.bind(this)}
+            />
+          </Row>
+          <Row>
+            <Table responsive className="map-component-breakdown">
+              <tbody>
+                <tr>
+                  <td>
+                    <b style={{ fontWeight: 500 }}>Delivery Address:</b>
+                  </td>
+                  <td>{this.state.deliveryAddress}</td>
+                </tr>
+                <tr>
+                  <td colSpan="2">
+                    You are located <b>{(this.state.distance / 1000).toFixed(2)}</b> km away
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </Row>
+        </>
       )
     );
   };
@@ -295,6 +327,7 @@ class OrderConfirmation extends Component {
         <hr></hr>
         <br />
         {this.renderBottomView()}
+        <br />
       </Container>
     );
   }
