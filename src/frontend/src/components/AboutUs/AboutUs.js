@@ -62,7 +62,6 @@ class AboutUs extends Component {
                             className="btn-icon btn-round mr-1"
                             variant="linkedin"
                             href="https://www.linkedin.com/in/plamen-velkov/"
-                            onClick={(e) => e.preventDefault()}
                           >
                             <Linkedin size={40} color="lightgray" />
                           </Button>
@@ -70,7 +69,6 @@ class AboutUs extends Component {
                             className="btn-icon btn-round"
                             variant="github"
                             href="https://github.com/pyvelkov"
-                            onClick={(e) => e.preventDefault()}
                           >
                             <Github size={40} color="royalblue" />
                           </Button>
@@ -119,7 +117,6 @@ class AboutUs extends Component {
                             className="btn-icon btn-round mr-1"
                             variant="linkedin"
                             href="https://www.linkedin.com/in/chrispinkney/"
-                            onClick={(e) => e.preventDefault()}
                           >
                             <Linkedin size={40} color="lightgray" />
                           </Button>
@@ -127,7 +124,6 @@ class AboutUs extends Component {
                             className="btn-icon btn-round"
                             variant="github"
                             href="https://github.com/chrispinkney"
-                            onClick={(e) => e.preventDefault()}
                           >
                             <Github size={40} color="royalblue" />
                           </Button>
@@ -176,7 +172,6 @@ class AboutUs extends Component {
                             className="btn-icon btn-round mr-1"
                             variant="linkedin"
                             href="https://www.linkedin.com/in/nilan-patel-0b320991/"
-                            onClick={(e) => e.preventDefault()}
                           >
                             <Linkedin size={40} color="lightgray" />
                           </Button>
@@ -184,7 +179,6 @@ class AboutUs extends Component {
                             className="btn-icon btn-round"
                             variant="github"
                             href="https://github.com/nilan01"
-                            onClick={(e) => e.preventDefault()}
                           >
                             <Github size={40} color="royalblue" />
                           </Button>
@@ -233,7 +227,6 @@ class AboutUs extends Component {
                             className="btn-icon btn-round mr-1"
                             variant="linkedin"
                             href="https://www.linkedin.com/in/andre-gopichan-bb7412191/"
-                            onClick={(e) => e.preventDefault()}
                           >
                             <Linkedin size={40} color="lightgray" />
                           </Button>
@@ -241,7 +234,6 @@ class AboutUs extends Component {
                             className="btn-icon btn-round"
                             variant="github"
                             href="https://github.com/andregopichan"
-                            onClick={(e) => e.preventDefault()}
                           >
                             <Github size={40} color="royalblue" />
                           </Button>
