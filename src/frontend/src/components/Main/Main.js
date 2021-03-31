@@ -7,6 +7,9 @@ import Footer from '../Footer/Footer';
 import Userpage from '../User/Userpage';
 import OrderConfirmation from '../OrderConfirmation/OrderConfirmation';
 import UserOrderHistory from '../User/UserOrderHistory';
+import AboutUs from '../AboutUs/AboutUs';
+import ToS from '../ToS/ToS';
+import ContactUs from '../ContactUs/ContactUs';
 
 class MainPage extends Component {
   // Receiving items added to cart, calculating total,
@@ -203,6 +206,15 @@ class MainPage extends Component {
               />
               <Route exact path="/orders">
                 <UserOrderHistory userInfo={this.state.userInfo} />
+              </Route>
+              <Route exact path="/aboutus">
+                <AboutUs />
+              </Route>
+              <Route exact path="/ToS">
+                <ToS />
+              </Route>
+              <Route exact path="/contactus">
+                <ContactUs />
               </Route>
               <Food receiveCart={this.receiveCart} updatedCart={this.state.cart} />
             </Switch>

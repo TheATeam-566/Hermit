@@ -12,27 +12,21 @@ export default function DemoFooter() {
           <Col md={{ span: 1.5, offset: 2 }}>
             <Nav>
               <NavItem>
-                <NavLink href="#" target="_blank">
-                  Contact Us
-                </NavLink>
+                <NavLink href="/contactus">Contact Us</NavLink>
               </NavItem>
             </Nav>
           </Col>
           <Col md={{ span: 1.5, offset: 0 }}>
             <Nav>
               <NavItem>
-                <NavLink href="#" target="_blank">
-                  About Us
-                </NavLink>
+                <NavLink href="/aboutus">About Us</NavLink>
               </NavItem>
             </Nav>
           </Col>
           <Col md={{ span: 1.5, offset: 0 }}>
             <Nav>
               <NavItem>
-                <NavLink href="#" target="_blank">
-                  Terms and Conditions
-                </NavLink>
+                <NavLink href="/tos">Terms and Conditions</NavLink>
               </NavItem>
             </Nav>
           </Col>
