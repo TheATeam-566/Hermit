@@ -217,7 +217,7 @@ class Userpage extends Component {
     return (
       <Container>
         <Row>
-          <Col>
+          <Col md={2}>
             <Link to="/orders">
               <Button className="btn-round animation-on-hover" variant="info">
                 Order History
@@ -226,6 +226,17 @@ class Userpage extends Component {
               <br />
             </Link>
           </Col>
+          {this.state.userInfo.isAdmin === true && (
+            <Col>
+              <Link to="/admin">
+                <Button className="btn-round animation-on-hover float-left" variant="warning">
+                  Daily Sales
+                </Button>
+                <br />
+                <br />
+              </Link>
+            </Col>
+          )}
         </Row>
         <Form>
           <Row>
