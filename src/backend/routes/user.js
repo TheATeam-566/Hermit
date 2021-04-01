@@ -80,4 +80,42 @@ router.get('/orders/:userid', async (req, res) => {
   }
 });
 
+router.get('/report', async (req, res) => {
+  const dbRef = db.collection('users');
+  const snapshot = await dbRef.get();
+
+  const todayDate = new Date();
+
+  const orders = [];
+  const tempUsers = [];
+
+  snapshot.forEach((user) => {
+    tempUsers.push(user.data());
+  });
+  // eslint-disable-next-line no-restricted-syntax
+  for await (const users of tempUsers) {
+    const dbRef2 = dbRef.doc(`${users.id}`).collection('orders');
+    const snapshot2 = await dbRef2.get();
+    if (snapshot2.empty) {
+      res.status(404);
+    } else {
+      orders.push(
+        snapshot2.docs.map((doc) => {
+          const orderDate = new Date(doc.data().OrderInfo.orderTime._seconds * 1000);
+          const userOrders = [];
+          if (
+            orderDate.getUTCDate() === todayDate.getUTCDate() &&
+            orderDate.getUTCMonth() + 1 === todayDate.getUTCMonth() + 1
+          ) {
+            userOrders.push(doc.data());
+          }
+
+          return userOrders;
+        })
+      );
+    }
+  }
+  res.json(orders);
+});
+
 module.exports = router;

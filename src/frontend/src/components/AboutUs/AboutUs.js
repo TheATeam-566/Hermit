@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Col, Row, Button, Carousel, Badge } from 'react-bootstrap';
+import { Container, Col, Row, Button, Carousel } from 'react-bootstrap';
 import { Linkedin, Github } from 'react-bootstrap-icons';
 import './AboutUs.css';
 

@@ -15,6 +15,7 @@ class User {
     this.refreshToken = data.refreshToken ? data.refreshToken : '';
     this.dateUserCreated = data.dateUserCreated ? data.dateUserCreated : '';
     this.lastUpdated = data.lastUpdated ? data.lastUpdated : '';
+    this.isAdmin = data.isAdmin ? data.isAdmin : '';
   }
 }
 

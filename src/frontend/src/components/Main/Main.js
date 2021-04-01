@@ -10,6 +10,7 @@ import UserOrderHistory from '../User/UserOrderHistory';
 import AboutUs from '../AboutUs/AboutUs';
 import ToS from '../ToS/ToS';
 import ContactUs from '../ContactUs/ContactUs';
+import Admin from '../User/Admin';
 
 class MainPage extends Component {
   // Receiving items added to cart, calculating total,
@@ -206,6 +207,9 @@ class MainPage extends Component {
               />
               <Route exact path="/orders">
                 <UserOrderHistory userInfo={this.state.userInfo} />
+              </Route>
+              <Route exact path="/admin">
+                <Admin />
               </Route>
               <Route exact path="/aboutus">
                 <AboutUs />
