@@ -102,7 +102,7 @@ class MainPage extends Component {
 
   // Call back function, received token from Header
   sendPayment = async (token) => {
-    token = { ...token, amount: this.state.total };
+    token = { ...token, amount: this.state.totalToPersist.grandTotal };
     const requestOptions = {
       method: 'POST',
       headers: {
