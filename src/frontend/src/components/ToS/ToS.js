@@ -6,7 +6,7 @@ class ToS extends Component {
   renderToS = () => {
     return (
       <>
-        <Container>
+        <Container className="ToS">
           <Row>
             <Col className="ml-auto mr-auto text-center" md="8">
               <h2 className="title">Welcome to Hermit!</h2>

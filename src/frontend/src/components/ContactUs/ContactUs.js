@@ -26,7 +26,7 @@ class ContactUs extends Component {
           <div className="main">
             <Container fluid>
               <Row className="infos mb-5">
-                <Col lg="3">
+                <Col lg="3" data-testid="add-column">
                   <div className="info info-hover">
                     <div className="icon icon-primary">
                       <img
@@ -40,7 +40,7 @@ class ContactUs extends Component {
                     <p className="description">1750 Finch Ave E, North York, ON</p>
                   </div>
                 </Col>
-                <Col lg="3">
+                <Col lg="3" data-testid="email-column">
                   <div className="info info-hover">
                     <div className="icon icon-info">
                       <img
@@ -54,7 +54,7 @@ class ContactUs extends Component {
                     <p className="description">theateam.566@gmail.com</p>
                   </div>
                 </Col>
-                <Col lg="3">
+                <Col lg="3" data-testid="phone-column">
                   <div className="info info-hover">
                     <div className="icon icon-warning">
                       <img
@@ -68,7 +68,7 @@ class ContactUs extends Component {
                     <p className="description">+1(416) 491 5050</p>
                   </div>
                 </Col>
-                <Col lg="3">
+                <Col lg="3" data-testid="contact-column">
                   <div className="info info-hover">
                     <div className="icon icon-success">
                       <img
@@ -100,7 +100,7 @@ class ContactUs extends Component {
                     <Card.Body>
                       <Form onSubmit={sendEmail}>
                         <FormGroup>
-                          <Form.Label for="exampleEmail1">Email address</Form.Label>
+                          <Form.Label htmlFor="exampleEmail1">Email address</Form.Label>
                           <Form.Control
                             type="email"
                             name="email"
@@ -109,11 +109,11 @@ class ContactUs extends Component {
                           />
                         </FormGroup>
                         <FormGroup>
-                          <Form.Label for="exampleSelect1">Name</Form.Label>
+                          <Form.Label htmlFor="exampleSelect1">Name</Form.Label>
                           <Form.Control type="text" name="name" id="name" />
                         </FormGroup>
                         <FormGroup>
-                          <Form.Label for="exampleSelectMulti1">Subject</Form.Label>
+                          <Form.Label htmlFor="exampleSelectMulti1">Subject</Form.Label>
                           <Form.Control
                             type="text"
                             name="subject"
@@ -122,7 +122,7 @@ class ContactUs extends Component {
                           />
                         </FormGroup>
                         <FormGroup>
-                          <Form.Label for="exampleText">Message</Form.Label>
+                          <Form.Label htmlFor="exampleText">Message</Form.Label>
                           <Form.Control as="textarea" rows={3} name="message" />
                         </FormGroup>
                         <Button className="btn-round animation-on-hover" type="submit">
