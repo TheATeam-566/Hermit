@@ -12,13 +12,14 @@ class UserOrderHistory extends Component {
     await this.fetchOrderHistory();
   };
 
+  // fetch all orders for the current user
   fetchOrderHistory = async () => {
     const response = await fetch(`/user/orders/${this.state.userInfo.id}`);
     const orderHistory = await response.json();
     this.setState({ orderHistory: orderHistory });
   };
 
-  // Renders the buttons on the form
+  // Renders each order for the current user in an accordion style card
   renderOrderHistory = () => {
     if (this.state.orderHistory.length === 0) {
       return (

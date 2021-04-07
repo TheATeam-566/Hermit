@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Container, Col, Row, FormGroup, Form, Card, Badge } from 'react-bootstrap';
 import Emailjs from 'emailjs-com';
 
+// functional component for making use and comfiguring Email.js
 function sendEmail(e) {
   e.preventDefault();
 
@@ -17,6 +18,7 @@ function sendEmail(e) {
 }
 
 class ContactUs extends Component {
+  // Simple submit form rendering and functionality that is hooked up with Email.js OnSubmit.
   renderContactUs = () => {
     return (
       <>

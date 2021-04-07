@@ -5,6 +5,7 @@ const router = express.Router();
 const keys = require('../config/keys');
 const stripe = require('stripe')(keys.stripeSecretKey);
 
+// POST the amount to stripe
 router.post('/', async (req, res) => {
   const charge = await stripe.charges.create({
     amount: Math.round(req.body.amount.toFixed(2) * 100),

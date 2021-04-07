@@ -52,6 +52,7 @@ class MainPage extends Component {
     }
   };
 
+  // receive child states from orderConfirmation to be passed to the header to be used globally around the app
   receiveOCTotal = (ocTotal) => {
     this.setState({
       totalToPersist: ocTotal,

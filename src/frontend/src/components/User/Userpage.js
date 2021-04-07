@@ -198,8 +198,6 @@ class Userpage extends Component {
   closeSubmitAlert = (e) => {
     e.preventDefault();
     this.setState({ showSubmitAlert: false });
-    // window.location.reload();
-    // window.location.href = 'https://localhost:3000/user';
   };
 
   // Closes the update confirmation alert panel

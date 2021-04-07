@@ -6,21 +6,26 @@ import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchBar/SearchResults';
 
 class Food extends Component {
+  // states used to store and retreive data
   state = { category: '', cart: [], searchField: '', items: [], searchLength: 0 };
 
+  // onClick handler for each category
   onCategoryClick = (category) => {
     this.setState({ category: category });
   };
 
+  // onClick handler for adding/updating items to cart
   onAddToCart = async (cart) => {
     this.setState({ cart: cart });
     await this.props.receiveCart(this.state.cart);
   };
 
+  // Searchbar handler for receiving searched items
   receiveItemsFromSearchResults = (itemsReceived) => {
     this.setState({ items: itemsReceived });
   };
 
+  // Searchbar handler for updating search query
   handleChangeSearch = (e) => {
     this.setState({
       searchField: e.target.value,
@@ -28,6 +33,7 @@ class Food extends Component {
     });
   };
 
+  // Searchbar 'x' reset handler for clearing the states used in searchbar
   handleResetSearch = () => {
     this.setState({ searchField: '', searchLength: 0 });
   };

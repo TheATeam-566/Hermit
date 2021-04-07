@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Main from './Main/Main';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// styles
+// styles and themes
 import '../assets/css/blk-design-system-pro-react.css';
 import '../assets/css/nucleo-icons.css';
 

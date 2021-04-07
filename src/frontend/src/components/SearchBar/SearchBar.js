@@ -4,6 +4,7 @@ import { Search, XCircleFill } from 'react-bootstrap-icons';
 import './SearchBar.css';
 
 class SearchBar extends Component {
+  // render the searchbar component
   renderSearchForm = () => {
     return (
       <>

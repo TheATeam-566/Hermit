@@ -63,6 +63,7 @@ router.post('/orders/:userid', async (req, res) => {
   }
 });
 
+// GET all orders for specified user
 router.get('/orders/:userid', async (req, res) => {
   const orderHistoryRef = db.collection('users').doc(req.params.userid).collection('orders');
   const snapshot = await orderHistoryRef.get();
@@ -80,6 +81,7 @@ router.get('/orders/:userid', async (req, res) => {
   }
 });
 
+// GET all orders for all users and parse the response to return orders only from current date
 router.get('/report', async (req, res) => {
   const dbRef = db.collection('users');
   const snapshot = await dbRef.get();

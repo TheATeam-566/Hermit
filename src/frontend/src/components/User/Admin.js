@@ -8,12 +8,14 @@ class Admin extends React.Component {
     total: 0.0,
   };
 
+  // fetch daily sales from firestore/backend
   fetchDailySales = async () => {
     const response = await fetch(`user/report`);
     const items = await response.json();
     this.setState({ users: items });
   };
 
+  // function to calculate the sum of all grand totals from daily sales
   updateDailyTotal = async () => {
     this.state.users.map((orders) =>
       orders.map((order) =>
@@ -29,6 +31,7 @@ class Admin extends React.Component {
     await this.updateDailyTotal();
   }
 
+  // render the table of all daily sales and Grand Grand total sum
   renderDailyReport = () => {
     return (
       <div>

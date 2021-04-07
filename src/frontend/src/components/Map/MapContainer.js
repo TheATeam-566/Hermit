@@ -3,6 +3,8 @@ import { withGoogleMap, GoogleMap, withScriptjs } from 'react-google-maps';
 import OuterDirections from './OuterDirections';
 import { compose, withProps, withHandlers } from 'recompose';
 
+// map functional component that uses recompose.js to combine google's distance matrix service and bind it to the actual map
+// in order to pass and retreive data needed to make charge calculation on orderConfirmation
 const Map = compose(
   withProps((props) => ({
     googleMapURL:
@@ -28,6 +30,7 @@ const Map = compose(
   withScriptjs,
   withGoogleMap
 )((props) => (
+  // used entirely to match the theme of the app and make google maps "dark mode"
   <GoogleMap
     defaultCenter={{ lat: 43.653225, lng: -79.383186 }}
     defaultZoom={10}
@@ -126,6 +129,7 @@ const Map = compose(
 class MapContainer extends Component {
   state = { address: this.props.address };
 
+  // functions below are all used to pass states used in OrderConfirmation (child -> parent)
   setDeliveryAddress = (newDeliveryAdd) => {
     this.props.getDeliveryAddress(newDeliveryAdd);
   };

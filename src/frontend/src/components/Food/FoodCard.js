@@ -18,6 +18,7 @@ class FoodCard extends Component {
     this.setState({ items: items });
   };
 
+  // FoodCard/Item add to cart onClick handler for adding items to cart
   clickHandler = async (e, item) => {
     e.preventDefault();
 
@@ -71,6 +72,7 @@ class FoodCard extends Component {
     }
   };
 
+  // Logic to render the actual items onto cards
   renderCategories = () => {
     return (
       <>

@@ -6,6 +6,7 @@ import './SearchResults.css';
 class SearchResults extends Component {
   state = { categories: [], items: [], cart: [] };
 
+  // function to query the database and get a response of all items out of their category into one giant list/array
   fetchMenuItems = async () => {
     const response = await fetch('api/menu/categories/allitems');
     const items = await response.json();
@@ -75,6 +76,7 @@ class SearchResults extends Component {
     }
   };
 
+  // render all items found/returned from the search query in searchbar
   renderItems = () => {
     return (
       <>

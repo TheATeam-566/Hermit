@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import MapDirectionsRenderer from './MapDirectionsRenderer';
 
+// this class is used as a wrapper to encapsulate all nested components required for google maps
 class OuterDirections extends Component {
   state = {
     address: this.props.address,
     distance: null,
   };
 
+  // functions below are all used to pass states used in OrderConfirmation (child -> parent)
   setDeliveryAddress = (newDeliveryAdd) => {
     this.props.getDeliveryAddress(newDeliveryAdd);
   };
