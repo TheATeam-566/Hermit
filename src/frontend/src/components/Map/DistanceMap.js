@@ -19,6 +19,7 @@ class DistanceMap extends Component {
     this.onScriptLoad = this.onScriptLoad.bind(this);
   }
 
+  // Use google Distance matrix to calculate the distance from point A to point B following google maps road outlines
   onScriptLoad() {
     let service = new google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
@@ -51,6 +52,7 @@ class DistanceMap extends Component {
   }
 
   componentDidMount() {
+    // check if the google maps API script has been loaded onto the current page if not load it
     if (!window.google) {
       var s = document.createElement('script');
       s.type = 'text/javascript';

@@ -4,6 +4,7 @@ import { Linkedin, Github } from 'react-bootstrap-icons';
 import './AboutUs.css';
 
 class AboutUs extends Component {
+  // Render the entire carousel component with the different user profiles
   renderCarousel = () => {
     return (
       <>
@@ -24,7 +25,7 @@ class AboutUs extends Component {
           </Row>
           <Row>
             <Carousel fade className="carousel-team">
-              {/* Plamens profile */}
+              {/* Plamen's profile */}
               <Carousel.Item>
                 <Container>
                   <Row>
@@ -78,7 +79,7 @@ class AboutUs extends Component {
                   </Row>
                 </Container>
               </Carousel.Item>
-              {/* Chris profile */}
+              {/* Chris' profile */}
               <Carousel.Item>
                 <Container>
                   <Row>
@@ -133,7 +134,7 @@ class AboutUs extends Component {
                   </Row>
                 </Container>
               </Carousel.Item>
-              {/* Nilans profile */}
+              {/* Nilan's profile */}
               <Carousel.Item>
                 <Container>
                   <Row>
@@ -188,7 +189,7 @@ class AboutUs extends Component {
                   </Row>
                 </Container>
               </Carousel.Item>
-              {/* Andres profile */}
+              {/* Andre's profile */}
               <Carousel.Item>
                 <Container>
                   <Row>

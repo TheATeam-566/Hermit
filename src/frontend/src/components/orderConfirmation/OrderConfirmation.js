@@ -33,6 +33,7 @@ class OrderConfirmation extends Component {
     },
   };
 
+  // Render the items received from the cart onto cards with increasing/decreasing quantity functionality
   renderCartReview = () => {
     return (
       <>
@@ -86,6 +87,7 @@ class OrderConfirmation extends Component {
     );
   };
 
+  // onClick handler to decrease the quantity of an item
   onDecreaseQuantity = async (e, food) => {
     e.preventDefault();
     // Find element in the cart array by caption and if found and quantity is not equal to 0, decrease the quantity of the element in the array by 1
@@ -111,6 +113,7 @@ class OrderConfirmation extends Component {
     });
   };
 
+  // onClick handler to increase the quantity of an item
   onIncreaseQuantity = async (e, food) => {
     e.preventDefault();
     // Find the element in the cart array by caption and if found and quantity is not equal to 0, increase the quantity of the element in the array by 1
@@ -131,12 +134,14 @@ class OrderConfirmation extends Component {
     });
   };
 
+  // function to set state gotten from child components (map Component)
   setDeliveryAddress = async (newDeliveryAdd) => {
     await this.setState({
       deliveryAddress: newDeliveryAdd,
     });
   };
 
+  // function to set state gotten from child components (map Component)
   setDistance = async (newDistance) => {
     await this.setState(
       {
@@ -150,10 +155,12 @@ class OrderConfirmation extends Component {
     );
   };
 
+  // function to set state gotten from child components (map Component)
   setDeliveryInfo = (newDelivery) => {
     this.props.getDelivery(newDelivery);
   };
 
+  // function to set state of distance and covert from meters to km
   setDistanceKm = async () => {
     await this.setState(
       {
@@ -167,6 +174,7 @@ class OrderConfirmation extends Component {
     );
   };
 
+  // function to calculate the delivery fee based on distance (base fee: 2.99 + 0.25/km over 5km)
   calculateDeliverFee = async () => {
     if (this.state.distanceKm > 5) {
       await this.setState({
@@ -179,6 +187,7 @@ class OrderConfirmation extends Component {
     this.calculateTax();
   };
 
+  // function to calculate the tax on total so far (subTotal + service fee + delivery fee)
   calculateTax = () => {
     this.setState({
       taxPrice:
@@ -190,6 +199,7 @@ class OrderConfirmation extends Component {
     this.props.receiveOCTotal(this.state.totalToPersist);
   };
 
+  // function to calculate Grand total of whole order (subtotal + service fee + delivery fee + tax)
   calculateTotal = async () => {
     await this.setState({
       totalPrice:
@@ -197,6 +207,7 @@ class OrderConfirmation extends Component {
     });
   };
 
+  //function for grand total to be passed back to parent to be used in storing to firestore
   setTotaltoPersist = async () => {
     await this.setState({
       totalToPersist: {
@@ -214,6 +225,7 @@ class OrderConfirmation extends Component {
     this.props.receiveTokenFromOrderConfirmation(this.state.token);
   };
 
+  // render 'Pay Now' button conditionally if user is logged in and cart contains at least one item
   renderCheckoutButton = () => {
     if (this.state.isLoggedIn) {
       if (this.state.cart.length !== 0) {
@@ -233,6 +245,7 @@ class OrderConfirmation extends Component {
     }
   };
 
+  // render the price breakdown section table
   renderPriceBreakdown = () => {
     return (
       <>
@@ -277,6 +290,7 @@ class OrderConfirmation extends Component {
     );
   };
 
+  // render the google map and the delivery address with distance from delivery address and cheesecake factory
   renderMapView = () => {
     return (
       this.setDistanceKm && (
@@ -311,6 +325,7 @@ class OrderConfirmation extends Component {
     );
   };
 
+  // render wrapper for map and pricebreakdown
   renderBottomView = () => {
     return (
       <Row>

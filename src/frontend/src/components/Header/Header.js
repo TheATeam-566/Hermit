@@ -40,6 +40,7 @@ class Header extends React.Component {
     await this.props.receiveCartFromModal(this.state.cart, this.state.total);
   };
 
+  // Render buttons according to loggedin state
   renderButtons = () => {
     if (!this.state.isLoggedIn) {
       return (
@@ -69,6 +70,7 @@ class Header extends React.Component {
     }
   };
 
+  // Render user avatar once logged in
   renderAvatar = () => {
     return (
       <>
@@ -86,6 +88,7 @@ class Header extends React.Component {
     );
   };
 
+  // Render user name
   renderName = () => {
     // if we're still waiting on async to return, do nothing
     if (this.state.userInfo.fName || this.state.userInfo.lName) {
@@ -101,6 +104,7 @@ class Header extends React.Component {
     }
   };
 
+  // Render user address
   renderAddress = () => {
     if (this.state.userInfo.address) {
       return (
@@ -123,6 +127,7 @@ class Header extends React.Component {
     }
   };
 
+  // Render the entire user profile on the header
   renderCurrentUser = () => {
     return (
       <>
@@ -162,10 +167,12 @@ class Header extends React.Component {
     );
   };
 
+  // Modal onClick Handler to show/hide modal
   showModal = () => {
     this.setState({ show: !this.state.show });
   };
 
+  // Render basket emoji
   renderBasketEmoji = () => {
     return (
       <Col>

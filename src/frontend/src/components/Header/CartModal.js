@@ -52,6 +52,7 @@ class CartModal extends React.Component {
     });
   };
 
+  // Render the modal body that will display the state of the cart(empty or items added)
   renderModalBody = () => {
     if (this.state.cart.length === 0) {
       return (
@@ -113,6 +114,7 @@ class CartModal extends React.Component {
     }
   };
 
+  // Render button to proceed to orderConfirmation
   renderButtons = () => {
     if (this.state.cart.length > 0) {
       return (

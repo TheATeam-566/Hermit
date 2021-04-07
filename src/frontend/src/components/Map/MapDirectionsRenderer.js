@@ -17,6 +17,7 @@ class MapDirectionsRenderer extends Component {
   }
 
   componentDidMount() {
+    // use googles directions service to properly follow road outlines and "draw" the route to take to the actual google map being rendered
     const directionsService = new google.maps.DirectionsService();
 
     directionsService.route(
@@ -39,6 +40,7 @@ class MapDirectionsRenderer extends Component {
     );
   }
 
+  // functions below are all used to pass states used in OrderConfirmation (child -> parent)
   setDeliveryAddress = (newDeliveryAdd) => {
     this.props.getDeliveryAddress(newDeliveryAdd);
   };

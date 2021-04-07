@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 
 class ToS extends Component {
+  // render the ToS page (note a template was used to grab the necessary text)
   renderToS = () => {
     return (
       <>
