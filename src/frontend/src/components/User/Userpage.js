@@ -238,7 +238,7 @@ class Userpage extends Component {
         </Row>
         <Form>
           <Row>
-            <Col>
+            <Col data-testid="fName">
               <Form.Group>
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
@@ -253,7 +253,7 @@ class Userpage extends Component {
           </Row>
 
           <Row>
-            <Col>
+            <Col data-testid="lName">
               <Form.Group>
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
@@ -268,7 +268,7 @@ class Userpage extends Component {
           </Row>
 
           <Row>
-            <Col>
+            <Col data-testid="email">
               <Form.Group>
                 <Form.Label>Email</Form.Label>
                 <Form.Control
@@ -283,7 +283,7 @@ class Userpage extends Component {
           </Row>
 
           <Row>
-            <Col>
+            <Col data-testid="address">
               <Form.Group>
                 <Form.Label>Address</Form.Label>
                 <Form.Control
@@ -299,7 +299,7 @@ class Userpage extends Component {
           </Row>
 
           <Row>
-            <Col>
+            <Col data-testid="city">
               <Form.Group>
                 <Form.Label>City</Form.Label>
                 <Form.Control
@@ -315,7 +315,7 @@ class Userpage extends Component {
           </Row>
 
           <Row>
-            <Col>
+            <Col data-testid="avatarUrl">
               <Form.Group>
                 <Form.Label>Image URL</Form.Label>
                 <Form.Control
@@ -351,9 +351,9 @@ class Userpage extends Component {
       return <>{this.renderForm()}</>;
     }
     return (
-      <>
+      <div data-testid="failed-login">
         <h2>Please log in to view this page.</h2>
-      </>
+      </div>
     );
   }
 }

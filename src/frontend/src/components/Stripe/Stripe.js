@@ -14,8 +14,8 @@ class Stripe extends Component {
         name={this.props.name}
         currency={this.props.currency}
         email={this.props.email}
-        shippingAddress={this.props.shippingAddress.address + ' ' + this.props.shippingAddress.city}
-        billingAddress={this.props.billingAddress.address + ' ' + this.props.billingAddress.city}
+        shippingAddress={this.props.shippingAddress.address}
+        billingAddress={this.props.billingAddress.address}
         label={this.props.label}
       >
         <Button variant="success" className="btn-round animation-on-hover">
