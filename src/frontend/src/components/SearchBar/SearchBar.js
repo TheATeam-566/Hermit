@@ -7,34 +7,32 @@ class SearchBar extends Component {
   // render the searchbar component
   renderSearchForm = () => {
     return (
-      <>
-        <Form.Group>
-          <InputGroup>
-            <InputGroup.Prepend>
-              <InputGroup.Text>
-                <Search />
-              </InputGroup.Text>
-            </InputGroup.Prepend>
-            <Form.Control
-              type="textarea"
-              value={this.props.formValue}
-              placeholder="Find your fave..."
-              onChange={this.props.handleChangeSearch}
-            />
-            <InputGroup.Append>
-              <InputGroup.Text
-                onClick={() => {
-                  if (this.props.searchLength > 0) {
-                    this.props.handleResetSearch();
-                  }
-                }}
-              >
-                <XCircleFill style={{ marginLeft: '12px' }} />
-              </InputGroup.Text>
-            </InputGroup.Append>
-          </InputGroup>
-        </Form.Group>
-      </>
+      <Form.Group>
+        <InputGroup>
+          <InputGroup.Prepend>
+            <InputGroup.Text>
+              <Search />
+            </InputGroup.Text>
+          </InputGroup.Prepend>
+          <Form.Control
+            type="textarea"
+            value={this.props.formValue}
+            placeholder="Find your fave..."
+            onChange={this.props.handleChangeSearch}
+          />
+          <InputGroup.Append>
+            <InputGroup.Text
+              onClick={() => {
+                if (this.props.searchLength > 0) {
+                  this.props.handleResetSearch();
+                }
+              }}
+            >
+              <XCircleFill style={{ marginLeft: '12px' }} />
+            </InputGroup.Text>
+          </InputGroup.Append>
+        </InputGroup>
+      </Form.Group>
     );
   };
 

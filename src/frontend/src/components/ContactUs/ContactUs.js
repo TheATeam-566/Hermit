@@ -7,12 +7,8 @@ function sendEmail(e) {
   e.preventDefault();
 
   Emailjs.sendForm('service_i948rgf', 'ateam_id', e.target, 'user_dfDmflXKpjaW9i6Q0yW3D').then(
-    (result) => {
-      console.log(result.text);
-    },
-    (error) => {
-      console.log(error.text);
-    }
+    (result) => {},
+    (error) => {}
   );
   e.target.reset();
 }

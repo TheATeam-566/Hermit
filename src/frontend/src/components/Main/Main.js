@@ -171,7 +171,7 @@ class MainPage extends Component {
           cart={this.state.cart}
           receiveCartFromModal={this.receiveCartFromModal}
         />
-        <Container fluid>
+        <Container fluid className="main-container">
           <div className="index-page">
             <div className="squares square1"></div>
             <div className="squares square3"></div>
