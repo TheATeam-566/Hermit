@@ -74,7 +74,7 @@ class Header extends React.Component {
           <Image
             className="profile-header-img"
             src={`${this.state.userInfo.image}`}
-            alt="User Avatar"
+            alt=""
             roundedCircle
           />
         </Link>
