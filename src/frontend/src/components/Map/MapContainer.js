@@ -8,7 +8,7 @@ import { compose, withProps, withHandlers } from 'recompose';
 const Map = compose(
   withProps((props) => ({
     googleMapURL:
-      'https://maps.googleapis.com/maps/api/js?key=AIzaSyCmLgpiiClR8g_H_BILfIPYMqyM1efck6s&libraries=geometry,drawing,places',
+      'https://maps.googleapis.com/maps/api/js?key=AIzaSyByf4_XDtDFjNH3e5-T9KrL2Rt5ejHo2p0&libraries=geometry,drawing,places',
     loadingElement: <div style={{ height: '100%' }} />,
     containerElement: <div style={{ height: '32vh', width: '22vw' }} />,
     mapElement: <div style={{ height: '100%' }} />,

@@ -57,7 +57,7 @@ class DistanceMap extends Component {
       var s = document.createElement('script');
       s.type = 'text/javascript';
       s.src =
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyCmLgpiiClR8g_H_BILfIPYMqyM1efck6s&libraries=geometry,drawing,places';
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyByf4_XDtDFjNH3e5-T9KrL2Rt5ejHo2p0&libraries=geometry,drawing,places';
       var x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);
       s.addEventListener('load', (e) => {
